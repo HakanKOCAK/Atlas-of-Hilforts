@@ -7,4 +7,5 @@
     <string name="menu_cancelHilfort">Cancel</string>
     <string name="enter_hilfort_title">Please enter a Hilfort Title</string>
     <string name="save_hilfort">Save Hilfort</string>
+    <string name="select_hilfort_image">Select hilfort image</string>
 </resources>

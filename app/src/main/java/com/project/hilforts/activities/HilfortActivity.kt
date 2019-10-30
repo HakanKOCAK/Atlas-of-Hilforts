@@ -1,10 +1,15 @@
 package com.project.hilforts.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.project.hilforts.R
+import com.project.hilforts.helpers.readImage
+import com.project.hilforts.helpers.readImageFromPath
+import com.project.hilforts.helpers.showImagePicker
 import com.project.hilforts.main.MainApp
 import com.project.hilforts.models.HilfortModel
 import kotlinx.android.synthetic.main.activity_hilforts.*
@@ -16,6 +21,10 @@ class HilfortActivity : AppCompatActivity(), AnkoLogger {
 
     var hilfort = HilfortModel()
     lateinit var app: MainApp
+    val IMAGE_REQUEST1 = 1
+    val IMAGE_REQUEST2 = 2
+    val IMAGE_REQUEST3 = 3
+    val IMAGE_REQUEST4 = 4
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +41,29 @@ class HilfortActivity : AppCompatActivity(), AnkoLogger {
             hilfort = intent.extras?.getParcelable<HilfortModel>("hilfort_edit")!!
             hilfortTitle.setText(hilfort.title)
             description.setText(hilfort.description)
+
+            if(hilfort.image1 != ""){hilfortImage1.setImageBitmap(readImageFromPath(this, hilfort.image1))}
+            if(hilfort.image2 != ""){hilfortImage2.setImageBitmap(readImageFromPath(this, hilfort.image2))}
+            if(hilfort.image3 != ""){hilfortImage3.setImageBitmap(readImageFromPath(this, hilfort.image3))}
+            if(hilfort.image4 != ""){hilfortImage4.setImageBitmap(readImageFromPath(this, hilfort.image4))}
+
             btnAdd.setText(R.string.save_hilfort)
+        }
+
+        hilfortImage1.setOnClickListener(){
+            showImagePicker(this, IMAGE_REQUEST1)
+        }
+
+        hilfortImage2.setOnClickListener(){
+            showImagePicker(this, IMAGE_REQUEST2)
+        }
+
+        hilfortImage3.setOnClickListener(){
+            showImagePicker(this, IMAGE_REQUEST3)
+        }
+
+        hilfortImage4.setOnClickListener(){
+            showImagePicker(this, IMAGE_REQUEST4)
         }
 
         btnAdd.setOnClickListener() {
@@ -65,5 +96,35 @@ class HilfortActivity : AppCompatActivity(), AnkoLogger {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            IMAGE_REQUEST1 -> {
+                if (data != null) {
+                    hilfort.image1 = data.getData().toString()
+                    hilfortImage1.setImageBitmap(readImage(this, resultCode, data))
+                }
+            }
+            IMAGE_REQUEST2 -> {
+                if (data != null) {
+                    hilfort.image2 = data.getData().toString()
+                    hilfortImage2.setImageBitmap(readImage(this, resultCode, data))
+                }
+            }
+            IMAGE_REQUEST3 -> {
+                if (data != null) {
+                    hilfort.image3 = data.getData().toString()
+                    hilfortImage3.setImageBitmap(readImage(this, resultCode, data))
+                }
+            }
+            IMAGE_REQUEST4 -> {
+                if (data != null) {
+                    hilfort.image4 = data.getData().toString()
+                    hilfortImage4.setImageBitmap(readImage(this, resultCode, data))
+                }
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.project.hilforts.models
 
+import android.view.View
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -27,6 +28,10 @@ class HilfortMemStore : HilfortStore, AnkoLogger{
         if(foundHilfort != null){
             foundHilfort.title = hilfort.title
             foundHilfort.description = hilfort.description
+            foundHilfort.image1 = hilfort.image1
+            foundHilfort.image2 = hilfort.image2
+            foundHilfort.image3 = hilfort.image3
+            foundHilfort.image4 = hilfort.image4
             logAll()
         }
     }
