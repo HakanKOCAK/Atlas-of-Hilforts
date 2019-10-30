@@ -13,6 +13,9 @@ import com.project.hilforts.helpers.showImagePicker
 import com.project.hilforts.main.MainApp
 import com.project.hilforts.models.HilfortModel
 import kotlinx.android.synthetic.main.activity_hilforts.*
+import kotlinx.android.synthetic.main.activity_hilforts.description
+import kotlinx.android.synthetic.main.activity_hilforts.hilfortTitle
+import kotlinx.android.synthetic.main.card_hilfort.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
@@ -81,6 +84,14 @@ class HilfortActivity : AppCompatActivity(), AnkoLogger {
             }
             setResult(AppCompatActivity.RESULT_OK)
             finish()
+        }
+
+        visited.setOnClickListener(){
+            if(visited.isChecked){
+                hilfort.visited = true
+            } else{
+                hilfort.visited = false
+            }
         }
     }
 

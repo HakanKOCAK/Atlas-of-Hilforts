@@ -24,5 +24,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/hilfortTitle" />
 
+        <CheckBox
+            android:id="@+id/visited"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignBaseline="@id/hilfortTitle"
+            android:layout_marginEnd="16dp"
+            android:text="Visited" />
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

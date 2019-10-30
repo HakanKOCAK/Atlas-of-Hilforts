@@ -39,6 +39,11 @@ class HilfortAdapter constructor(
             itemView.hilfortTitle.text = hilfort.title
             itemView.description.text = hilfort.description
             itemView.setOnClickListener{ listener.onHilfortClick(hilfort)}
+            if(hilfort.visited){
+                itemView.visited.isChecked = true
+            } else{
+                itemView.visited.isChecked = false
+            }
         }
     }
 }

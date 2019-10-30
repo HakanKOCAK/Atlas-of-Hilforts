@@ -32,6 +32,7 @@ class HilfortMemStore : HilfortStore, AnkoLogger{
             foundHilfort.image2 = hilfort.image2
             foundHilfort.image3 = hilfort.image3
             foundHilfort.image4 = hilfort.image4
+            foundHilfort.visited = hilfort.visited
             logAll()
         }
     }

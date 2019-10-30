@@ -16,5 +16,6 @@ class MainApp : Application(), AnkoLogger {
         hilforts.create(HilfortModel(title = "One", description = "About One"))
         hilforts.create(HilfortModel(title = "Two", description = "About Two"))
         hilforts.create(HilfortModel(title = "Three", description = "About Three"))
+        hilforts.create(HilfortModel(title = "Three", description = "About Three", visited = true))
     }
 }
