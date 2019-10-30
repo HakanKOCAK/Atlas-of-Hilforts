@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Hilforts</string>
+    <string name="button_addHilfort">Add Hilfort</string>
+    <string name="hint_hilfortTitle">Hilfort Title</string>
+    <string name="hint_hilfortDescription">Description </string>
+    <string name="menu_addHilfort">Add</string>
+    <string name="menu_cancelHilfort">Cancel</string>
+    <string name="enter_hilfort_title">Please enter a Hilfort Title</string>
+    <string name="save_hilfort">Save Hilfort</string>
 </resources>
