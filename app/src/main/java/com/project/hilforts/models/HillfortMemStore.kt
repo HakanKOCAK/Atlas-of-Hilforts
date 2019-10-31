@@ -10,20 +10,20 @@ internal fun getId(): Long {
 }
 
 class HillfortMemStore : HillfortStore, AnkoLogger{
-    val hilforts = ArrayList<HillfortModel>()
+    val hillforts = ArrayList<HillfortModel>()
 
     override fun findAll(): List<HillfortModel> {
-        return hilforts
+        return hillforts
     }
 
-    override fun create(hilfort: HillfortModel) {
-        hilfort.id = getId()
-        hilforts.add(hilfort)
+    override fun create(hillfort: HillfortModel) {
+        hillfort.id = getId()
+        hillforts.add(hillfort)
         logAll()
     }
 
     override fun update(hillfort: HillfortModel) {
-        var foundHillfort: HillfortModel? = hilforts.find { p -> p.id == hillfort.id }
+        var foundHillfort: HillfortModel? = hillforts.find { p -> p.id == hillfort.id }
         if(foundHillfort != null){
             foundHillfort.title = hillfort.title
             foundHillfort.description = hillfort.description
@@ -42,6 +42,6 @@ class HillfortMemStore : HillfortStore, AnkoLogger{
     }
 
     fun logAll(){
-        hilforts.forEach{info { "${it}" }}
+        hillforts.forEach{info { "${it}" }}
     }
 }

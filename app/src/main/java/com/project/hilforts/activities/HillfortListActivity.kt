@@ -13,7 +13,6 @@ import com.project.hilforts.main.MainApp
 import com.project.hilforts.models.HillfortModel
 import kotlinx.android.synthetic.main.activity_hilfort_list.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.card_hillfort.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 
@@ -70,6 +69,9 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
             R.id.edit -> {
                 HillfortListActivity.isHome = false
                 startActivityForResult<HillfortListActivity>(0)
+            }
+            R.id.settings -> {
+                startActivityForResult<SettingActivity>(0)
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)

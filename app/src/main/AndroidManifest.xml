@@ -20,13 +20,18 @@
             android:name=".activities.MapActivity"
             android:label="@string/title_activity_map"></activity>
         <activity android:name=".activities.HillfortActivity"></activity>
-        <activity android:name=".activities.HillfortListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".activities.SettingActivity"></activity>
+        <activity android:name=".activities.SplashActivity"
+            android:theme="@style/SplashTheme"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.HillfortListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 
