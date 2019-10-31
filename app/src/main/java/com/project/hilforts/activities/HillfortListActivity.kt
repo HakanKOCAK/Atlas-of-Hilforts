@@ -5,21 +5,20 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.project.hilforts.R
 import com.project.hilforts.main.MainApp
-import com.project.hilforts.models.HilfortModel
-import kotlinx.android.synthetic.main.activity_hilforts_list.*
-import kotlinx.android.synthetic.main.card_hilfort.view.*
+import com.project.hilforts.models.HillfortModel
+import kotlinx.android.synthetic.main.activity_hillforts_list.*
+import kotlinx.android.synthetic.main.card_hillfort.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 
-class HilfortListActivity : AppCompatActivity(), HilfortListener{
+class HillfortListActivity : AppCompatActivity(), HillfortListener{
     lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hilforts_list)
+        setContentView(R.layout.activity_hillforts_list)
         app = application as MainApp
 
         toolbar.title = title
@@ -27,7 +26,15 @@ class HilfortListActivity : AppCompatActivity(), HilfortListener{
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = HilfortAdapter(app.hilforts.findAll(), this)
+        recyclerView.adapter = HillfortAdapter(app.hillforts.findAll(), this)
+
+        /*visited.setOnClickListener(){
+            if(visited.isChecked){
+                hillfort.visited = true
+            } else{
+                hillfort.visited = false
+            }
+        }*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean{
@@ -37,13 +44,13 @@ class HilfortListActivity : AppCompatActivity(), HilfortListener{
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
-            R.id.item_add -> startActivityForResult<HilfortActivity>(0)
+            R.id.item_add -> startActivityForResult<HillfortActivity>(0)
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onHilfortClick(hilfort: HilfortModel) {
-        startActivityForResult(intentFor<HilfortActivity>().putExtra("hilfort_edit", hilfort), 0)
+    override fun onHillfortClick(hillfort: HillfortModel) {
+        startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -1,6 +1,5 @@
 package com.project.hilforts.models
 
-import android.view.View
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -10,21 +9,21 @@ internal fun getId(): Long {
     return lastId++
 }
 
-class HilfortMemStore : HilfortStore, AnkoLogger{
-    val hilforts = ArrayList<HilfortModel>()
+class HillfortMemStore : HillfortStore, AnkoLogger{
+    val hilforts = ArrayList<HillfortModel>()
 
-    override fun findAll(): List<HilfortModel> {
+    override fun findAll(): List<HillfortModel> {
         return hilforts
     }
 
-    override fun create(hilfort: HilfortModel) {
+    override fun create(hilfort: HillfortModel) {
         hilfort.id = getId()
         hilforts.add(hilfort)
         logAll()
     }
 
-    override fun update(hilfort: HilfortModel) {
-        var foundHilfort: HilfortModel? = hilforts.find { p -> p.id == hilfort.id }
+    override fun update(hilfort: HillfortModel) {
+        var foundHilfort: HillfortModel? = hilforts.find { p -> p.id == hilfort.id }
         if(foundHilfort != null){
             foundHilfort.title = hilfort.title
             foundHilfort.description = hilfort.description
