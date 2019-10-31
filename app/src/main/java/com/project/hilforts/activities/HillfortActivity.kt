@@ -38,7 +38,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_hillforts)
         app = application as MainApp
 
-        toolbarAdd.title = title
+        toolbarAdd.title = "Add/Edit"
         setSupportActionBar(toolbarAdd)
 
         var edit = false

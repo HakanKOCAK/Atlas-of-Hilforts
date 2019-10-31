@@ -35,7 +35,7 @@
             android:layout_below="@id/hillfortTitle"
             android:textSize="10sp"/>
 
-        <CheckBox
+        <TextView
             android:id="@+id/visited"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignBaseline="@id/hillfortTitle"
             android:layout_marginEnd="16dp"
-            android:text="Visited" />
+            android:text="Not Visited" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

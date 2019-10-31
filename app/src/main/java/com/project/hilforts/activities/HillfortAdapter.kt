@@ -1,5 +1,6 @@
 package com.project.hilforts.activities
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,6 @@ import kotlinx.android.synthetic.main.card_hillfort.view.*
 
 interface HillfortListener{
     fun onHillfortClick(hillfort: HillfortModel)
-    fun onVisitedClick(hillfort: HillfortModel)
 }
 
 class HillfortAdapter constructor(
@@ -51,11 +51,12 @@ class HillfortAdapter constructor(
             }
 
             itemView.setOnClickListener{ listener.onHillfortClick(hillfort)}
-            itemView.visited.setOnClickListener{ listener.onVisitedClick(hillfort)}
             if(hillfort.visited){
-                itemView.visited.isChecked  = true
+                itemView.visited.setText("Visited")
+                itemView.setBackgroundColor(Color.parseColor("#BDFEA2"))
             } else{
-                itemView.visited.isChecked = false
+                itemView.visited.setText("Not Visited")
+                itemView.setBackgroundColor(Color.parseColor("#ffffff"))
             }
         }
     }
