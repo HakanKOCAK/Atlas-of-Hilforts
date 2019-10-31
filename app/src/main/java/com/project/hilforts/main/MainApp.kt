@@ -1,20 +1,27 @@
 package com.project.hilforts.main
 
 import android.app.Application
-import com.project.hilforts.models.HilfortMemStore
-import com.project.hilforts.models.HilfortModel
+import com.project.hilforts.models.HillfortMemStore
+import com.project.hilforts.models.HillfortModel
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 
 class MainApp : Application(), AnkoLogger {
 
-    val hilforts = HilfortMemStore()
+    lateinit var hillforts: HillfortMemStore
 
     override fun onCreate() {
         super.onCreate()
-        info("Hilfort started")
-        hilforts.create(HilfortModel(title = "One", description = "About One"))
-        hilforts.create(HilfortModel(title = "Two", description = "About Two"))
-        hilforts.create(HilfortModel(title = "Three", description = "About Three"))
+        hillforts = HillfortMemStore()
+        hillforts.create(HillfortModel(title = "Ballinkillin", description = "Contour Fort", lat = 52.653029, lng = -6.9333, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Gortacrossig", description = "Promontory Fort", lat = 51.48747, lng = -9.21048, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Largysillagh", description = "Promontory Fort", lat = 54.62661, lng = 8.51306, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Earlspark", description = "Contour Fort", lat = 53.17213, lng = -8.54161, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Muckross", description = "Promontory Fort", lat = 54.60892, lng = -8.59217, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Howth", description = "Promontory Fort", lat = 53.36498, lng = -6.05573, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Culoort", description = "Promontory Fort", lat = 55.33215, lng = -7.35183, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Redford Glebe", description = "Contour Fort", lat = 55.29004, lng = 7.12054, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Knockanacuig", description = "Contour Fort", lat = 52.27088, lng = -9.72976, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Kill Hill", description = "Multiple Enclosure Hillfort", lat = 53.24759, lng = -6.57669, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Clonmantagh", description = "Level Terrain Fort", lat = 52.73984, lng = -7.50817, zoom = 13f))
     }
 }
