@@ -9,7 +9,6 @@ import com.project.hilforts.R
 import com.project.hilforts.main.MainApp
 import com.project.hilforts.models.HillfortModel
 import kotlinx.android.synthetic.main.activity_hillforts_list.*
-import kotlinx.android.synthetic.main.card_hillfort.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 
@@ -23,7 +22,6 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener{
 
         toolbar.title = title
         setSupportActionBar(toolbar)
-
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = HillfortAdapter(app.hillforts.findAll(), this)

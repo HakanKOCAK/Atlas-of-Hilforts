@@ -11,11 +11,12 @@ import com.project.hilforts.helpers.readImageFromPath
 import com.project.hilforts.helpers.showImagePicker
 import com.project.hilforts.main.MainApp
 import com.project.hilforts.models.HillfortModel
+import com.project.hilforts.models.Location
 import kotlinx.android.synthetic.main.activity_hillforts.*
 import kotlinx.android.synthetic.main.activity_hillforts.description
 import kotlinx.android.synthetic.main.activity_hillforts.hillfortTitle
-import kotlinx.android.synthetic.main.card_hillfort.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
@@ -26,6 +27,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     val IMAGE_REQUEST2 = 2
     val IMAGE_REQUEST3 = 3
     val IMAGE_REQUEST4 = 4
+
+    val LOCATION_REQUEST = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +86,16 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             setResult(AppCompatActivity.RESULT_OK)
             finish()
         }
+
+        hillfortLocation.setOnClickListener{
+            val location = Location(54.189,-4.557, 5.2f)
+            if (hillfort.zoom != 0f) {
+                location.lat =  hillfort.lat
+                location.lng = hillfort.lng
+                location.zoom = hillfort.zoom
+            }
+            startActivityForResult(intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -124,6 +137,14 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 if (data != null) {
                     hillfort.image4 = data.getData().toString()
                     hillfortImage4.setImageBitmap(readImage(this, resultCode, data))
+                }
+            }
+            LOCATION_REQUEST -> {
+                if (data != null) {
+                    val location = data.extras?.getParcelable<Location>("location")!!
+                    hillfort.lat = location.lat
+                    hillfort.lng = location.lng
+                    hillfort.zoom = location.zoom
                 }
             }
         }
