@@ -66,6 +66,14 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
+                <TextView
+                    android:id="@+id/textViewForImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Please Click on the Image Views to Add/Update the foto"
+                    android:textSize="13sp"
+                    android:gravity="center_horizontal"/>
+
                 <LinearLayout
                     android:id="@+id/imgLayout1"
                     android:layout_width="match_parent"
