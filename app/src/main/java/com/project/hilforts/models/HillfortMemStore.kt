@@ -36,6 +36,7 @@ class HillfortMemStore : HillfortStore, AnkoLogger{
             foundHillfort.lng = hillfort.lng
             foundHillfort.zoom = hillfort.zoom
             foundHillfort.dateVisited = hillfort.dateVisited
+            foundHillfort.additionalNote = hillfort.additionalNote
             logAll()
         }
     }

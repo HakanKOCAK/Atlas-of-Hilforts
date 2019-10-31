@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_hillforts.*
 import kotlinx.android.synthetic.main.activity_hillforts.description
 import kotlinx.android.synthetic.main.activity_hillforts.hillfortTitle
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
@@ -30,7 +31,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     val IMAGE_REQUEST3 = 3
     val IMAGE_REQUEST4 = 4
 
-    val LOCATION_REQUEST = 2
+    val LOCATION_REQUEST = 5
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,11 +48,13 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort = intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             hillfortTitle.setText(hillfort.title)
             description.setText(hillfort.description)
+
+            textViewForVisited.setText(hillfort.dateVisited)
+            additionalNote.setText(hillfort.additionalNote)
             if(hillfort.image1 != ""){hillfortImage1.setImageBitmap(readImageFromPath(this, hillfort.image1))}
             if(hillfort.image2 != ""){hillfortImage2.setImageBitmap(readImageFromPath(this, hillfort.image2))}
             if(hillfort.image3 != ""){hillfortImage3.setImageBitmap(readImageFromPath(this, hillfort.image3))}
             if(hillfort.image4 != ""){hillfortImage4.setImageBitmap(readImageFromPath(this, hillfort.image4))}
-            textViewForVisited.setText(hillfort.dateVisited)
 
             if(hillfort.visited){
                 visited.isChecked = true
@@ -85,14 +88,17 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 val formatter = SimpleDateFormat.getDateTimeInstance() //or use getDateInstance()
                 val formatedDate = formatter.format(date)
                 hillfort.dateVisited = formatedDate
+                textViewForVisited.setText(formatedDate)
             } else {
                 hillfort.dateVisited = ""
+                textViewForVisited.setText("")
             }
         }
 
         btnAdd.setOnClickListener() {
             hillfort.title = hillfortTitle.text.toString()
             hillfort.description = description.text.toString()
+            hillfort.additionalNote = additionalNote.text.toString()
             if(hillfort.title.isEmpty()){
                 toast(R.string.enter_hillfort_title)
             } else {
@@ -134,6 +140,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        info("Request code is: ${requestCode}")
         when (requestCode) {
             IMAGE_REQUEST1 -> {
                 if (data != null) {
@@ -161,6 +168,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             }
             LOCATION_REQUEST -> {
                 if (data != null) {
+                    info("girdixdxd")
                     val location = data.extras?.getParcelable<Location>("location")!!
                     hillfort.lat = location.lat
                     hillfort.lng = location.lng

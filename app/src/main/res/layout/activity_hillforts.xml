@@ -69,7 +69,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_margin="8dp">
                     <CheckBox
                         android:id="@+id/visited"
                         android:layout_width="wrap_content"
@@ -137,6 +138,17 @@
                     android:text="@string/button_location"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"/>
+
+                <EditText
+                    android:id="@+id/additionalNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_margin="8dp"
+                    android:inputType="text"
+                    android:hint="@string/additional_note"
+                    android:padding="8dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/btnAdd"

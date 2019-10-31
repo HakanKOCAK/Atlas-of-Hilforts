@@ -12,9 +12,16 @@ class MainApp : Application(), AnkoLogger {
     override fun onCreate() {
         super.onCreate()
         hillforts = HillfortMemStore()
-        hillforts.create(HillfortModel(title = "One", description = "About One"))
-        hillforts.create(HillfortModel(title = "Two", description = "About Two"))
-        hillforts.create(HillfortModel(title = "Three", description = "About Three"))
-        hillforts.create(HillfortModel(title = "Three", description = "About Three", visited = true))
+        hillforts.create(HillfortModel(title = "Ballinkillin", description = "Contour Fort", lat = 52.653029, lng = -6.9333, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Gortacrossig", description = "Promontory Fort", lat = 51.48747, lng = -9.21048, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Largysillagh", description = "Promontory Fort", lat = 54.62661, lng = 8.51306, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Earlspark", description = "Contour Fort", lat = 53.17213, lng = -8.54161, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Muckross", description = "Promontory Fort", lat = 54.60892, lng = -8.59217, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Howth", description = "Promontory Fort", lat = 53.36498, lng = -6.05573, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Culoort", description = "Promontory Fort", lat = 55.33215, lng = -7.35183, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Redford Glebe", description = "Contour Fort", lat = 55.29004, lng = 7.12054, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Knockanacuig", description = "Contour Fort", lat = 52.27088, lng = -9.72976, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Kill Hill", description = "Multiple Enclosure Hillfort", lat = 53.24759, lng = -6.57669, zoom = 13f))
+        hillforts.create(HillfortModel(title = "Clonmantagh", description = "Level Terrain Fort", lat = 52.73984, lng = -7.50817, zoom = 13f))
     }
 }

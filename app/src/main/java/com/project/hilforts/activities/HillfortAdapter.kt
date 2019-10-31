@@ -39,7 +39,7 @@ class HillfortAdapter constructor(
     class MainHolder constructor(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(hillfort: HillfortModel, listener: HillfortListener){
             itemView.hillfortTitle.text = hillfort.title
-            itemView.location.text = "${hillfort.lat}, ${hillfort.lng}"
+            itemView.location.text = "Location: ${hillfort.lat}, ${hillfort.lng}"
             if(hillfort.image1 != ""){
                 itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, hillfort.image1))
             } else if (hillfort.image2 != ""){

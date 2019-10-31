@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -43,6 +42,14 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
     }
 
+    override fun onBackPressed() {
+        val resultIntent = Intent()
+        resultIntent.putExtra("location", location)
+        setResult(Activity.RESULT_OK, resultIntent)
+        finish()
+        super.onBackPressed()
+    }
+
     override fun onMarkerDragStart(marker: Marker) {
     }
 
@@ -53,14 +60,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         location.lat = marker.position.latitude
         location.lng = marker.position.longitude
         location.zoom = map.cameraPosition.zoom
-    }
-
-    override fun onBackPressed() {
-        val resultIntent = Intent()
-        resultIntent.putExtra("location", location)
-        setResult(Activity.RESULT_OK, resultIntent)
-        finish()
-        super.onBackPressed()
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
