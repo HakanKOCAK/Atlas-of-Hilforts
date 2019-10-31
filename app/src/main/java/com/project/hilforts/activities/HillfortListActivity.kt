@@ -27,14 +27,6 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener{
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = HillfortAdapter(app.hillforts.findAll(), this)
-
-        /*visited.setOnClickListener(){
-            if(visited.isChecked){
-                hillfort.visited = true
-            } else{
-                hillfort.visited = false
-            }
-        }*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean{
@@ -53,6 +45,9 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener{
         startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
     }
 
+    override fun onVisitedClick(hillfort: HillfortModel) {
+        hillfort.visited = !hillfort.visited
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         recyclerView.adapter?.notifyDataSetChanged()
         super.onActivityResult(requestCode, resultCode, data)

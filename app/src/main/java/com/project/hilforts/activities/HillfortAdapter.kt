@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.card_hillfort.view.*
 
 interface HillfortListener{
     fun onHillfortClick(hillfort: HillfortModel)
+    fun onVisitedClick(hillfort: HillfortModel)
 }
 
 class HillfortAdapter constructor(
@@ -39,6 +40,7 @@ class HillfortAdapter constructor(
             itemView.hillfortTitle.text = hillfort.title
             itemView.description.text = hillfort.description
             itemView.setOnClickListener{ listener.onHillfortClick(hillfort)}
+            itemView.visited.setOnClickListener{ listener.onVisitedClick(hillfort)}
             if(hillfort.visited){
                 itemView.visited.isChecked  = true
             } else{
