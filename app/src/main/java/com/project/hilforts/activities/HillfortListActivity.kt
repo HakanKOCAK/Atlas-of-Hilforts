@@ -11,6 +11,8 @@ import com.project.hilforts.models.HillfortModel
 import kotlinx.android.synthetic.main.activity_hillforts_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HillfortListActivity : AppCompatActivity(), HillfortListener{
     lateinit var app: MainApp
@@ -45,6 +47,15 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener{
 
     override fun onVisitedClick(hillfort: HillfortModel) {
         hillfort.visited = !hillfort.visited
+
+        if(hillfort.visited){
+            val date = Calendar.getInstance().time
+            val formatter = SimpleDateFormat.getDateTimeInstance() //or use getDateInstance()
+            val formatedDate = formatter.format(date)
+            hillfort.dateVisited = formatedDate
+        } else {
+            hillfort.dateVisited = ""
+        }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         recyclerView.adapter?.notifyDataSetChanged()

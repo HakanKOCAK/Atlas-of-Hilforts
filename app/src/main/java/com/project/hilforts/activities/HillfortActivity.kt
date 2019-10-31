@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_hillforts.hillfortTitle
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
@@ -45,12 +47,17 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort = intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             hillfortTitle.setText(hillfort.title)
             description.setText(hillfort.description)
-
             if(hillfort.image1 != ""){hillfortImage1.setImageBitmap(readImageFromPath(this, hillfort.image1))}
             if(hillfort.image2 != ""){hillfortImage2.setImageBitmap(readImageFromPath(this, hillfort.image2))}
             if(hillfort.image3 != ""){hillfortImage3.setImageBitmap(readImageFromPath(this, hillfort.image3))}
             if(hillfort.image4 != ""){hillfortImage4.setImageBitmap(readImageFromPath(this, hillfort.image4))}
+            textViewForVisited.setText(hillfort.dateVisited)
 
+            if(hillfort.visited){
+                visited.isChecked = true
+            } else {
+                visited.isChecked = false
+            }
             btnAdd.setText(R.string.save_hillfort)
         }
 
@@ -68,6 +75,19 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         hillfortImage4.setOnClickListener(){
             showImagePicker(this, IMAGE_REQUEST4)
+        }
+
+        visited.setOnClickListener(){
+            hillfort.visited = !hillfort.visited
+
+            if(hillfort.visited){
+                val date = Calendar.getInstance().time
+                val formatter = SimpleDateFormat.getDateTimeInstance() //or use getDateInstance()
+                val formatedDate = formatter.format(date)
+                hillfort.dateVisited = formatedDate
+            } else {
+                hillfort.dateVisited = ""
+            }
         }
 
         btnAdd.setOnClickListener() {

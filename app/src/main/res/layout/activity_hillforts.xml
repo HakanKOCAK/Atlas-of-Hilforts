@@ -66,12 +66,33 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/visited"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:text="Visited" />
+
+                    <TextView
+                        android:id="@+id/textViewForVisited"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:layout_marginLeft="15dp"/>
+
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/textViewForImages"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Please Click on the Image Views to Add/Update the foto"
                     android:textSize="13sp"
+                    android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"/>
 
                 <LinearLayout
