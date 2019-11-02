@@ -54,7 +54,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = HillfortAdapter(app.hillforts.findAll(), this)
+        recyclerView.adapter = HillfortAdapter(app.users.getUserHillforts(app.loggedInUserEmail), this)
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {

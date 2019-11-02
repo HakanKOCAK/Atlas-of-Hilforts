@@ -23,7 +23,7 @@ class SettingActivity: AppCompatActivity(), AnkoLogger {
         setSupportActionBar(toolbarSettings)
 
         var count = 0
-        val hillforts = app.hillforts.findAll()
+        val hillforts = app.users.getUserHillforts(app.loggedInUserEmail)
         for(h in hillforts){
             if(h.visited) count += 1
         }

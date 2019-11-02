@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.LoginSignupActivity">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarSettings"
+        android:id="@+id/toolbarLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:titleTextColor="@color/colorPrimary"
@@ -60,7 +60,8 @@
             android:text="Login"
             android:textAllCaps="false"
             android:textSize="21sp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:onClick="onLogin"/>
 
         <TextView
             android:id="@+id/signup_text"
@@ -132,6 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sign up"
+            android:onClick="onSignUp"
             android:textAllCaps="false"
             android:textSize="21sp"
             android:layout_marginTop="10dp"/>
