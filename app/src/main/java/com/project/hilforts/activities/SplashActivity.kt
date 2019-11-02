@@ -2,7 +2,6 @@ package com.project.hilforts.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.project.hilforts.R
 
@@ -17,7 +16,7 @@ class SplashActivity: AppCompatActivity(){
                 try {
                     Thread.sleep(4000)
 
-                    val intent = Intent(baseContext, HillfortListActivity::class.java)
+                    val intent = Intent(baseContext, LoginSignupActivity::class.java)
                     startActivity(intent)
                 } catch (e: Exception){
                     e.printStackTrace()

@@ -73,6 +73,9 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
             R.id.settings -> {
                 startActivityForResult<SettingActivity>(0)
             }
+            R.id.logout -> {
+                startActivityForResult<LoginSignupActivity>(0)
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

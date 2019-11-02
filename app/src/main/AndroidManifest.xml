@@ -21,6 +21,7 @@
             android:label="@string/title_activity_map"></activity>
         <activity android:name=".activities.HillfortActivity"></activity>
         <activity android:name=".activities.SettingActivity"></activity>
+        <activity android:name=".activities.LoginSignupActivity"></activity>
         <activity android:name=".activities.SplashActivity"
             android:theme="@style/SplashTheme"
             android:noHistory="true">
