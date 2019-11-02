@@ -42,6 +42,11 @@ class UserJSONStore : UserStore, AnkoLogger {
         serialize()
     }
 
+    override fun deleteUserHillfort(userEmail: String, hillfort: HillfortModel) {
+        getUserHillforts(userEmail).remove(hillfort)
+        logAll(userEmail)
+        serialize()
+    }
     override fun createUserHillfort(userEmail: String, hillfort: HillfortModel) {
         hillfort.id = generateRandomId()
         getUserHillforts(userEmail).add(hillfort)

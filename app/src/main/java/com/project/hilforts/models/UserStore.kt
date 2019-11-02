@@ -6,4 +6,5 @@ interface UserStore {
     fun updateUserHillfort(userEmail: String, hillfort: HillfortModel)
     fun createUserHillfort(userEmail: String, hillfort: HillfortModel)
     fun getUserHillforts(userEmail: String): ArrayList<HillfortModel>
+    fun deleteUserHillfort(userEmail: String, hillfort: HillfortModel)
 }

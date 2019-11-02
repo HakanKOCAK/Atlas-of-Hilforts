@@ -1,9 +1,11 @@
 package com.project.hilforts.activities
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +15,7 @@ import com.project.hilforts.main.MainApp
 import com.project.hilforts.models.HillfortModel
 import kotlinx.android.synthetic.main.activity_hilfort_list.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.card_hillfort.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 
@@ -21,6 +24,8 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
 
     companion object {
         var isHome = true
+        var isEditing = false
+        var isDeleting = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +38,10 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
 
         if(HillfortListActivity.isHome){
             actionBar?.title = "Home"
-        } else {
+        } else if(HillfortListActivity.isEditing) {
             actionBar?.title = "Edit"
+        } else {
+            actionBar?.title = "Delete"
         }
         val drawerToggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(
             this,
@@ -61,6 +68,8 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
         when(menuItem.itemId){
             R.id.home -> {
                 HillfortListActivity.isHome = true
+                HillfortListActivity.isEditing = false
+                HillfortListActivity.isDeleting = false
                 startActivityForResult<HillfortListActivity>(0)
             }
             R.id.add -> {
@@ -68,6 +77,8 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
             }
             R.id.edit -> {
                 HillfortListActivity.isHome = false
+                HillfortListActivity.isEditing = true
+                HillfortListActivity.isDeleting = false
                 startActivityForResult<HillfortListActivity>(0)
             }
             R.id.settings -> {
@@ -75,6 +86,12 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
             }
             R.id.logout -> {
                 startActivityForResult<LoginSignupActivity>(0)
+            }
+            R.id.delete -> {
+                HillfortListActivity.isHome = false
+                HillfortListActivity.isEditing = false
+                HillfortListActivity.isDeleting = true
+                startActivityForResult<HillfortListActivity>(0)
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -92,8 +109,22 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
     override fun onHillfortClick(hillfort: HillfortModel) {
         if(HillfortListActivity.isHome){
             return
+        } else if (HillfortListActivity.isEditing){
+            startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
+        } else {
+            val alertDialog = AlertDialog.Builder(this@HillfortListActivity)
+            alertDialog.setTitle("${hillfort.title}")
+            alertDialog.setMessage("Do you want to delete Hillfort?")
+
+            alertDialog.setPositiveButton("Yes") { dialog, which ->
+                app.users.deleteUserHillfort(app.loggedInUserEmail, hillfort)
+                startActivityForResult<HillfortListActivity>(0)
+            }
+            alertDialog.setNeutralButton("Cancel"){dialog, which ->
+                dialog.dismiss()
+            }
+            alertDialog.show()
         }
-        startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
