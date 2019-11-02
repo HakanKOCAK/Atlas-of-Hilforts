@@ -27,6 +27,8 @@ class SettingActivity: AppCompatActivity(), AnkoLogger {
         for(h in hillforts){
             if(h.visited) count += 1
         }
+        settings_email.setText("E-mail: ${app.loggedInUserEmail}")
+        settings_password.setText("Password: ${app.loggedInUserPassword}")
         visited_hillforts.setText("Visited Hilforts: ${count}")
         total_hillforts.setText("Total Number of Hilforts: ${hillforts.size}")
     }

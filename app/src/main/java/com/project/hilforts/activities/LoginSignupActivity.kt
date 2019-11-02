@@ -19,10 +19,7 @@ class LoginSignupActivity : AppCompatActivity(){
         setContentView(R.layout.login_activity)
 
         app = application as MainApp
-
-        toolbarLogin.title = "Login"
-        setSupportActionBar(toolbarLogin)
-
+        
         login_text.setOnClickListener(){
             showLogIn()
         }
@@ -35,13 +32,11 @@ class LoginSignupActivity : AppCompatActivity(){
     private fun showRegistration(){
         signup_layout.visibility = View.VISIBLE
         login_layout.visibility = View.GONE
-        toolbarLogin.setTitle("Register")
     }
 
     private fun showLogIn(){
         signup_layout.visibility = View.GONE
         login_layout.visibility = View.VISIBLE
-        toolbarLogin.setTitle("Login")
     }
 
     fun onLogin(v: View){

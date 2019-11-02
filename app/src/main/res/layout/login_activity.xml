@@ -6,12 +6,6 @@
     android:background="#59606D"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.LoginSignupActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titleTextColor="@color/colorPrimary"
-        android:background="@color/colorAccent"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,7 +61,7 @@
             android:id="@+id/signup_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign in"
+            android:text="Sign Up"
             android:textSize="21sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
