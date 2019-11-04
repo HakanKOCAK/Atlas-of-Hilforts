@@ -69,13 +69,20 @@ class HillfortAdapter constructor(
                 itemView.delete_icon.visibility = View.GONE
                 if(hillfort.visited){
                     itemView.edit_icon.setBackgroundColor(Color.parseColor("#BDFEA2"))
+                    itemView.delete_icon.setBackgroundColor(Color.parseColor("#BDFEA2"))
                 } else {
                     itemView.edit_icon.setBackgroundColor(Color.parseColor("#ffffff"))
+                    itemView.delete_icon.setBackgroundColor(Color.parseColor("#ffffff"))
                 }
             } else {
                 itemView.visited.visibility = View.GONE
                 itemView.edit_icon.visibility = View.GONE
                 itemView.delete_icon.visibility = View.VISIBLE
+                if(hillfort.visited){
+                    itemView.delete_icon.setBackgroundColor(Color.parseColor("#BDFEA2"))
+                } else {
+                    itemView.delete_icon.setBackgroundColor(Color.parseColor("#ffffff"))
+                }
             }
         }
     }
