@@ -2,10 +2,10 @@
 
 Please do not forget to replace your google api key with the one in values/google_maps_api.xml which is disabled.
 
-Application Concept:
--Develop an application supporting an exploration
+<br>Application Concept:
+<br>-Develop an application supporting an exploration
 of Hillforts
--Users are archaeology students.
+<br>-Users are archaeology students.
 -App should contain a list of hillforts they have
 been assigned to visit.
 -Users visit site, take photos + notes which
