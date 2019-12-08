@@ -6,19 +6,19 @@ Please do not forget to replace your google api key with the one in values/googl
 <br>-Develop an application supporting an exploration
 of Hillforts
 <br>-Users are archaeology students.
--App should contain a list of hillforts they have
+<br>-App should contain a list of hillforts they have
 been assigned to visit.
--Users visit site, take photos + notes which
+<br>-Users visit site, take photos + notes which
 augment the information on the hillfort provided by
 the app.
--Students can add additional Hillforts - which may
+<br>-Students can add additional Hillforts - which may
 be uncharted
 
-
+<br><br>
 App Components:
-1 Opening Screen / Splash Screen:
-2 Signup / Login
-3 Toolbar
-4 List of Hillforts
-5 Create/Edit Hillfort
-6 Settings
+<br>1 Opening Screen / Splash Screen:
+<br>2 Signup / Login
+<br>3 Toolbar
+<br>4 List of Hillforts
+<br>5 Create/Edit Hillfort
+<br>6 Settings
