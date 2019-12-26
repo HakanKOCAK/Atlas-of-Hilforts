@@ -23,7 +23,6 @@ fun generateRandomId(): String {
 }
 
 class UserJSONStore : UserStore, AnkoLogger {
-
     var users = ArrayList<UserModel>()
     val context: Context
 
@@ -87,6 +86,13 @@ class UserJSONStore : UserStore, AnkoLogger {
 
         return ArrayList<HillfortModel>()
     }
+
+    override fun findHillfortById(userEmail: String, id: String): HillfortModel? {
+
+        var foundHillfort: HillfortModel? = getUserHillforts(userEmail).find { it.id == id }
+        return foundHillfort
+    }
+
 
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(users, listType)

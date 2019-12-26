@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.project.hilforts.R
+import com.project.hilforts.helpers.readImageFromPath
 import com.project.hilforts.main.MainApp
 
 import kotlinx.android.synthetic.main.activity_hillfort_maps.*
@@ -32,8 +33,21 @@ class HillfortMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        currentTitle.text = marker.title
-        return false
+        val tag = marker.tag as String
+        val hillfort = app.users.findHillfortById(userEmail = app.loggedInUserEmail, id = tag)
+        currentTitle.text = hillfort!!.title
+        currentDescription.text = hillfort!!.description
+        if (hillfort!!.image1 != null){
+            currentImage.setImageBitmap(readImageFromPath(this, hillfort!!.image1))
+        } else if (hillfort!!.image2 != null){
+            currentImage.setImageBitmap(readImageFromPath(this, hillfort!!.image2))
+        } else if (hillfort!!.image3 != null){
+            currentImage.setImageBitmap(readImageFromPath(this, hillfort!!.image3))
+        } else {
+            currentImage.setImageBitmap(readImageFromPath(this, hillfort!!.image4))
+        }
+
+        return true
     }
 
     override fun onDestroy() {
