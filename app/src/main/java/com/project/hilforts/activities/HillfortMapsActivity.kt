@@ -37,11 +37,11 @@ class HillfortMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
         val hillfort = app.users.findHillfortById(userEmail = app.loggedInUserEmail, id = tag)
         currentTitle.text = hillfort!!.title
         currentDescription.text = hillfort!!.description
-        if (hillfort!!.image1 != null){
+        if (hillfort!!.image1 != ""){
             currentImage.setImageBitmap(readImageFromPath(this, hillfort!!.image1))
-        } else if (hillfort!!.image2 != null){
+        } else if (hillfort!!.image2 != ""){
             currentImage.setImageBitmap(readImageFromPath(this, hillfort!!.image2))
-        } else if (hillfort!!.image3 != null){
+        } else if (hillfort!!.image3 != ""){
             currentImage.setImageBitmap(readImageFromPath(this, hillfort!!.image3))
         } else {
             currentImage.setImageBitmap(readImageFromPath(this, hillfort!!.image4))
