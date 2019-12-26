@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_hilfort_list.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.card_hillfort.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 
 class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationView.OnNavigationItemSelectedListener{
@@ -62,6 +63,18 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = HillfortAdapter(app.users.getUserHillforts(app.loggedInUserEmail), this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.item_map -> startActivity<HillfortMapsActivity>()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.project.hilforts">
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -11,6 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.HillfortMapsActivity"
+            android:label="@string/title_activity_hillfort_maps"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -18,22 +23,23 @@
 
         <activity
             android:name=".activities.MapActivity"
-            android:label="@string/title_activity_map"></activity>
-        <activity android:name=".activities.HillfortActivity"></activity>
-        <activity android:name=".activities.SettingActivity"></activity>
-        <activity android:name=".activities.LoginSignupActivity"></activity>
-        <activity android:name=".activities.SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:noHistory="true">
+            android:label="@string/title_activity_map" />
+        <activity android:name=".activities.HillfortActivity" />
+        <activity android:name=".activities.SettingActivity" />
+        <activity android:name=".activities.LoginSignupActivity" />
+        <activity
+            android:name=".activities.SplashActivity"
+            android:noHistory="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.HillfortListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+        <activity
+            android:name=".activities.HillfortListActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

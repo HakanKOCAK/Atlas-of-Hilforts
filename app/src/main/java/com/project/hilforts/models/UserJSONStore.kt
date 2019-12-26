@@ -70,8 +70,8 @@ class UserJSONStore : UserStore, AnkoLogger {
             foundHillfort.dateVisited = hillfort.dateVisited
             foundHillfort.additionalNote = hillfort.additionalNote
             logAll(userEmail)
-            serialize()
         }
+        serialize()
     }
 
     fun logAll(userEmail: String){
