@@ -14,5 +14,8 @@
     <string name="additional_note">Additional Note</string>
     <string name="close">Close</string>
     <string name="open">Open</string>
-    <string name="title_activity_hillfort_maps">HillfortMapsActivity</string>
+    <string name="title_activity_hillfort_maps">Map of All Hillforts</string>
+    <string name="hillfort_image_placeholder">Hillfort Image</string>
+    <string name="hillfort_title_placeholder">Hillfort Title</string>
+    <string name="hillfort_description_placeholder">Hillfort Description</string>
 </resources>
