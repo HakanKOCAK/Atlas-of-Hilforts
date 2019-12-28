@@ -15,7 +15,7 @@
         <activity
             android:name=".activities.HillfortMapsActivity"
             android:label="@string/title_activity_hillfort_maps"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -39,7 +39,7 @@
         </activity>
         <activity
             android:name=".activities.HillfortListActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
