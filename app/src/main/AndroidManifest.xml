@@ -15,7 +15,11 @@
         <activity
             android:name=".views.map.HillfortMapView"
             android:label="@string/title_activity_hillfort_maps"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:launchMode="singleTop" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.hillfortList.HillfortListView" />
+        </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -23,8 +27,18 @@
 
         <activity
             android:name=".views.editLocation.EditLocationView"
-            android:label="@string/title_activity_map" />
-        <activity android:name=".views.hillfort.HillfortView" />
+            android:label="@string/title_activity_map" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.hillfort.HillfortView" />
+        </activity>
+
+        <activity android:name=".views.hillfort.HillfortView"
+            android:label="@string/title_activity_hillfort">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.hillfortList.HillfortListView" />
+        </activity>
         <activity android:name=".views.settings.SettingsView" />
         <activity android:name=".views.loginSignup.LoginSignupView" />
         <activity
@@ -39,6 +53,7 @@
         </activity>
         <activity
             android:name=".views.hillfortList.HillfortListView"
+            android:label="@string/title_activity_hillfort_list"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

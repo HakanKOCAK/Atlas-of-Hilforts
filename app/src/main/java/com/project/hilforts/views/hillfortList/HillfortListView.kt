@@ -30,6 +30,7 @@ class HillfortListView : BaseView(),
         setSupportActionBar(toolBar)
         val actionBar = supportActionBar
 
+        init(toolBar, false)
         presenter = initPresenter(HillfortListPresenter(this)) as HillfortListPresenter
 
         if(isHome){

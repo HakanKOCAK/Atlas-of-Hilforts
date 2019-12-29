@@ -2,11 +2,10 @@ package com.project.hilforts.main
 
 import android.app.Application
 import com.project.hilforts.models.HillfortModel
-import com.project.hilforts.models.UserJSONStore
+import com.project.hilforts.models.json.UserJSONStore
 import org.jetbrains.anko.AnkoLogger
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.random.Random
 
 class MainApp : Application(), AnkoLogger {
 

@@ -18,10 +18,10 @@ class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.O
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_location)
-        super.init(toolbar)
+        super.init(toolbar, true)
         presenter = EditLocationPresenter(this)
 
-        mapView.onCreate(savedInstanceState);
+        mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             it.setOnMarkerDragListener(this)
             it.setOnMarkerClickListener(this)

@@ -1,4 +1,4 @@
-package com.project.hilforts.models
+package com.project.hilforts.models.json
 
 import android.content.Context
 import org.jetbrains.anko.AnkoLogger
@@ -9,9 +9,11 @@ import com.google.gson.reflect.TypeToken
 import com.project.hilforts.helpers.exists
 import com.project.hilforts.helpers.read
 import com.project.hilforts.helpers.write
+import com.project.hilforts.models.HillfortModel
+import com.project.hilforts.models.UserModel
+import com.project.hilforts.models.UserStore
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.random.Random
 
 
 val JSON_FILE = "placemarks.json"
@@ -95,7 +97,9 @@ class UserJSONStore : UserStore, AnkoLogger {
 
 
     private fun serialize() {
-        val jsonString = gsonBuilder.toJson(users, listType)
+        val jsonString = gsonBuilder.toJson(users,
+            listType
+        )
         write(context, JSON_FILE, jsonString)
     }
 
