@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#59606D"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".activities.LoginSignupActivity">
+    tools:context=".views.loginSignup.LoginSignupView">
 
     <LinearLayout
         android:layout_width="match_parent"

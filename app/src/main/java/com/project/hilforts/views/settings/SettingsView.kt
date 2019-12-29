@@ -1,4 +1,4 @@
-package com.project.hilforts.activities
+package com.project.hilforts.views.settings
 
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -11,26 +11,17 @@ import com.project.hilforts.main.MainApp
 import kotlinx.android.synthetic.main.activity_setting.*
 import org.jetbrains.anko.info
 
-class SettingActivity: AppCompatActivity(), AnkoLogger {
-    lateinit var app: MainApp
+class SettingsView: AppCompatActivity(), AnkoLogger {
 
+    lateinit var presenter: SettingsPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
-        app =  application as MainApp
 
+        presenter = SettingsPresenter(this)
+        presenter.doSetView()
         toolbarSettings.title = "Settings"
         setSupportActionBar(toolbarSettings)
-
-        var count = 0
-        val hillforts = app.users.getUserHillforts(app.loggedInUserEmail)
-        for(h in hillforts){
-            if(h.visited) count += 1
-        }
-        settings_email.setText("E-mail: ${app.loggedInUserEmail}")
-        settings_password.setText("Password: ${app.loggedInUserPassword}")
-        visited_hillforts.setText("Visited Hilforts: ${count}")
-        total_hillforts.setText("Total Number of Hilforts: ${hillforts.size}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -41,7 +32,7 @@ class SettingActivity: AppCompatActivity(), AnkoLogger {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             R.id.item_cancel -> {
-                finish()
+                presenter.doCancel()
             }
         }
         return super.onOptionsItemSelected(item)

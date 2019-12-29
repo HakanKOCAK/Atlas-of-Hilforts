@@ -1,6 +1,5 @@
-package com.project.hilforts.activities
+package com.project.hilforts.views.hillfortList
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -11,17 +10,13 @@ import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import com.project.hilforts.R
-import com.project.hilforts.main.MainApp
 import com.project.hilforts.models.HillfortModel
 import kotlinx.android.synthetic.main.activity_hilfort_list.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.card_hillfort.*
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.startActivityForResult
 
-class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationView.OnNavigationItemSelectedListener{
-    lateinit var app: MainApp
+class HillfortListView : AppCompatActivity(),
+    HillfortListener, NavigationView.OnNavigationItemSelectedListener{
+    lateinit var presenter: HillfortListPresenter
 
     companion object {
         var isHome = true
@@ -32,14 +27,14 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hilfort_list)
-        app = application as MainApp
-
         setSupportActionBar(toolBar)
         val actionBar = supportActionBar
 
-        if(HillfortListActivity.isHome){
+        presenter = HillfortListPresenter(this)
+
+        if(isHome){
             actionBar?.title = "Home"
-        } else if(HillfortListActivity.isEditing) {
+        } else if(isEditing) {
             actionBar?.title = "Edit"
         } else {
             actionBar?.title = "Delete"
@@ -62,7 +57,8 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = HillfortAdapter(app.users.getUserHillforts(app.loggedInUserEmail), this)
+        recyclerView.adapter =
+            HillfortAdapter(presenter.getHillforts(), this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -72,7 +68,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.item_map -> startActivity<HillfortMapsActivity>()
+            R.id.item_map -> presenter.doShowHillfortsMap()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -80,31 +76,31 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when(menuItem.itemId){
             R.id.home -> {
-                HillfortListActivity.isHome = true
-                HillfortListActivity.isEditing = false
-                HillfortListActivity.isDeleting = false
-                startActivityForResult<HillfortListActivity>(0)
+                isHome = true
+                isEditing = false
+                isDeleting = false
+                presenter.doShowSelectedScreen()
             }
             R.id.add -> {
-                startActivityForResult<HillfortActivity>(0)
+                presenter.doAddHillfort()
             }
             R.id.edit -> {
-                HillfortListActivity.isHome = false
-                HillfortListActivity.isEditing = true
-                HillfortListActivity.isDeleting = false
-                startActivityForResult<HillfortListActivity>(0)
+                isHome = false
+                isEditing = true
+                isDeleting = false
+                presenter.doShowSelectedScreen()
             }
             R.id.settings -> {
-                startActivityForResult<SettingActivity>(0)
+                presenter.doShowSettingsScreen()
             }
             R.id.logout -> {
-                startActivityForResult<LoginSignupActivity>(0)
+                presenter.doLogOut()
             }
             R.id.delete -> {
-                HillfortListActivity.isHome = false
-                HillfortListActivity.isEditing = false
-                HillfortListActivity.isDeleting = true
-                startActivityForResult<HillfortListActivity>(0)
+                isHome = false
+                isEditing = false
+                isDeleting = true
+                presenter.doShowSelectedScreen()
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -120,18 +116,17 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, NavigationVi
     }
 
     override fun onHillfortClick(hillfort: HillfortModel) {
-        if(HillfortListActivity.isHome){
+        if(isHome){
             return
-        } else if (HillfortListActivity.isEditing){
-            startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
+        } else if (isEditing){
+           presenter.doEditHillfort(hillfort)
         } else {
-            val alertDialog = AlertDialog.Builder(this@HillfortListActivity)
+            val alertDialog = AlertDialog.Builder(this@HillfortListView)
             alertDialog.setTitle("${hillfort.title}")
             alertDialog.setMessage("Do you want to delete Hillfort?")
 
             alertDialog.setPositiveButton("Yes") { dialog, which ->
-                app.users.deleteUserHillfort(app.loggedInUserEmail, hillfort)
-                startActivityForResult<HillfortListActivity>(0)
+                presenter.doDeleteHillfort(hillfort)
             }
             alertDialog.setNeutralButton("Cancel"){dialog, which ->
                 dialog.dismiss()

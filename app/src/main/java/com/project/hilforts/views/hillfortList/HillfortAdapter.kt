@@ -1,4 +1,4 @@
-package com.project.hilforts.activities
+package com.project.hilforts.views.hillfortList
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -59,11 +59,11 @@ class HillfortAdapter constructor(
                 itemView.setBackgroundColor(Color.parseColor("#ffffff"))
             }
 
-            if(HillfortListActivity.isHome){
+            if(HillfortListView.isHome){
                 itemView.visited.visibility = View.VISIBLE
                 itemView.edit_icon.visibility = View.GONE
                 itemView.delete_icon.visibility = View.GONE
-            } else if (HillfortListActivity.isEditing){
+            } else if (HillfortListView.isEditing){
                 itemView.visited.visibility = View.GONE
                 itemView.edit_icon.visibility = View.VISIBLE
                 itemView.delete_icon.visibility = View.GONE

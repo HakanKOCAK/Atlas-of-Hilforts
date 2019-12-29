@@ -1,4 +1,4 @@
-package com.project.hilforts.activities
+package com.project.hilforts.views.hillfort
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_hillforts.visited
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 
-class HillfortActivity : AppCompatActivity(), AnkoLogger {
+class HillfortView : AppCompatActivity(), AnkoLogger {
 
     lateinit var presenter: HillfortPresenter
     var hillfort = HillfortModel()
@@ -49,14 +49,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             textViewForVisited.setText(str)
         }
 
-        btnAdd.setOnClickListener() {
-            if(hillfortTitle.text.toString().isEmpty()){
-                toast(R.string.enter_hillfort_title)
-            } else {
-                presenter.doAddOrSave(hillfortTitle.text.toString(), description.text.toString(), additionalNote.text.toString())
-            }
-        }
-
         hillfortLocation.setOnClickListener{
             presenter.doSetLocation()
         }
@@ -78,7 +70,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             visited.isChecked = false
             textViewForVisited.setText("")
         }
-        btnAdd.setText(R.string.save_hillfort)
     }
 
 
@@ -90,7 +81,14 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             R.id.item_cancel -> {
-                finish()
+                presenter.doCancel()
+            }
+            R.id.item_save -> {
+                if(hillfortTitle.text.toString().isEmpty()){
+                    toast(R.string.enter_hillfort_title)
+                } else {
+                    presenter.doAddOrSave(hillfortTitle.text.toString(), description.text.toString(), additionalNote.text.toString())
+                }
             }
         }
         return super.onOptionsItemSelected(item)
