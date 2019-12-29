@@ -18,6 +18,7 @@ class SettingsPresenter(val view: SettingsView) {
         for(h in hillforts){
             if(h.visited) count += 1
         }
+
         view.settings_email.setText("E-mail: ${app.loggedInUserEmail}")
         view.settings_password.setText("Password: ${app.loggedInUserPassword}")
         view.visited_hillforts.setText("Visited Hilforts: ${count}")
