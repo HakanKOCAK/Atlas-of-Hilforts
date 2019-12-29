@@ -5,47 +5,46 @@ import com.project.hilforts.views.loginSignup.LoginSignupView
 import com.project.hilforts.views.settings.SettingsView
 import com.project.hilforts.main.MainApp
 import com.project.hilforts.models.HillfortModel
+import com.project.hilforts.views.base.BasePresenter
+import com.project.hilforts.views.base.BaseView
+import com.project.hilforts.views.base.VIEW
 import com.project.hilforts.views.hillfort.HillfortView
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 
-class HillfortListPresenter(val view: HillfortListView) {
+class HillfortListPresenter(view: BaseView) : BasePresenter(view) {
 
-    var app: MainApp
-
-    init{
-        app = view.application as MainApp
+    fun loadHillforts() {
+        view?.showHillforts(app.users.getUserHillforts(app.loggedInUserEmail))
     }
 
-    fun getHillforts() = app.users.getUserHillforts(app.loggedInUserEmail)
-
     fun doShowHillfortsMap() {
-        view.startActivity<HillfortMapView>()
+        view?.navigateTo(VIEW.MAPS)
     }
 
     fun doAddHillfort(){
-        view.startActivityForResult<HillfortView>(0)
+        view?.navigateTo(VIEW.HILLFORT)
     }
 
     fun doShowSelectedScreen(){
-        view.startActivityForResult<HillfortListView>(0)
+        view?.navigateTo(VIEW.LIST)
     }
 
     fun doShowSettingsScreen(){
-        view.startActivityForResult<SettingsView>(0)
+        view?.navigateTo(VIEW.SETTINGS)
     }
 
     fun doLogOut(){
-        view.startActivityForResult<LoginSignupView>(0)
+        view?.navigateTo(VIEW.LOGINSIGNUP)
     }
 
     fun doEditHillfort(hillfort: HillfortModel) {
-        view.startActivityForResult(view.intentFor<HillfortView>().putExtra("hillfort_edit", hillfort), 0)
+        view?.navigateTo(VIEW.HILLFORT, 0, "placemark_edit", hillfort)
     }
 
     fun doDeleteHillfort(hillfort: HillfortModel){
         app.users.deleteUserHillfort(app.loggedInUserEmail, hillfort)
-        view.startActivityForResult<HillfortListView>(0)
+        view?.navigateTo(VIEW.LIST)
     }
 }

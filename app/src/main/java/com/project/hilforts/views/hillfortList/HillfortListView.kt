@@ -5,16 +5,16 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import com.project.hilforts.R
 import com.project.hilforts.models.HillfortModel
+import com.project.hilforts.views.base.BaseView
 import kotlinx.android.synthetic.main.activity_hilfort_list.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-class HillfortListView : AppCompatActivity(),
+class HillfortListView : BaseView(),
     HillfortListener, NavigationView.OnNavigationItemSelectedListener{
     lateinit var presenter: HillfortListPresenter
 
@@ -30,7 +30,7 @@ class HillfortListView : AppCompatActivity(),
         setSupportActionBar(toolBar)
         val actionBar = supportActionBar
 
-        presenter = HillfortListPresenter(this)
+        presenter = initPresenter(HillfortListPresenter(this)) as HillfortListPresenter
 
         if(isHome){
             actionBar?.title = "Home"
@@ -57,8 +57,12 @@ class HillfortListView : AppCompatActivity(),
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter =
-            HillfortAdapter(presenter.getHillforts(), this)
+        presenter.loadHillforts()
+    }
+
+    override fun showHillforts(hillforts: List<HillfortModel>) {
+        recyclerView.adapter = HillfortAdapter(hillforts, this)
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -107,14 +111,6 @@ class HillfortListView : AppCompatActivity(),
         return true
     }
 
-    override fun onBackPressed() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
-
     override fun onHillfortClick(hillfort: HillfortModel) {
         if(isHome){
             return
@@ -136,7 +132,7 @@ class HillfortListView : AppCompatActivity(),
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        recyclerView.adapter?.notifyDataSetChanged()
+        presenter.loadHillforts()
         super.onActivityResult(requestCode, resultCode, data)
     }
 }

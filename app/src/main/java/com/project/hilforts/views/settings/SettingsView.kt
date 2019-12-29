@@ -8,17 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import org.jetbrains.anko.AnkoLogger
 import com.project.hilforts.R
 import com.project.hilforts.main.MainApp
+import com.project.hilforts.views.base.BaseView
 import kotlinx.android.synthetic.main.activity_setting.*
 import org.jetbrains.anko.info
 
-class SettingsView: AppCompatActivity(), AnkoLogger {
+class SettingsView: BaseView(), AnkoLogger {
 
     lateinit var presenter: SettingsPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
-        presenter = SettingsPresenter(this)
+        presenter = initPresenter (SettingsPresenter(this)) as SettingsPresenter
         presenter.doSetView()
         toolbarSettings.title = "Settings"
         setSupportActionBar(toolbarSettings)

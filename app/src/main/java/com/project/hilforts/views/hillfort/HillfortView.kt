@@ -1,13 +1,13 @@
 package com.project.hilforts.views.hillfort
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.project.hilforts.R
 import com.project.hilforts.helpers.readImageFromPath
 import com.project.hilforts.models.HillfortModel
+import com.project.hilforts.views.base.BaseView
 import kotlinx.android.synthetic.main.activity_hillforts.*
 import kotlinx.android.synthetic.main.activity_hillforts.description
 import kotlinx.android.synthetic.main.activity_hillforts.hillfortTitle
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_hillforts.visited
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 
-class HillfortView : AppCompatActivity(), AnkoLogger {
+class HillfortView : BaseView(), AnkoLogger {
 
     lateinit var presenter: HillfortPresenter
     var hillfort = HillfortModel()
@@ -23,10 +23,9 @@ class HillfortView : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillforts)
-        toolbarAdd.title = "Add/Edit"
-        setSupportActionBar(toolbarAdd)
+        init(toolbarAdd)
 
-        presenter = HillfortPresenter(this)
+        presenter = initPresenter (HillfortPresenter(this)) as HillfortPresenter
 
         hillfortImage1.setOnClickListener(){
             presenter.doSelectImage(1)
@@ -54,7 +53,7 @@ class HillfortView : AppCompatActivity(), AnkoLogger {
         }
     }
 
-    fun showHillfort(hillfort: HillfortModel) {
+    override fun showHillfort(hillfort: HillfortModel) {
         hillfortTitle.setText(hillfort.title)
         description.setText(hillfort.description)
         additionalNote.setText(hillfort.additionalNote)
@@ -99,5 +98,9 @@ class HillfortView : AppCompatActivity(), AnkoLogger {
         if (data != null) {
             presenter.doActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    override fun onBackPressed() {
+        presenter.doCancel()
     }
 }

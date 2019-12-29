@@ -6,19 +6,15 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.project.hilforts.main.MainApp
+import com.project.hilforts.models.HillfortModel
+import com.project.hilforts.views.base.BasePresenter
+import com.project.hilforts.views.base.BaseView
 
-class HillfortMapPresenter(val view: HillfortMapView) {
+class HillfortMapPresenter(view: BaseView) : BasePresenter(view){
 
-    var app: MainApp
-
-    init{
-        app = view.application as MainApp
-    }
-
-    fun doPopulateMap(map: GoogleMap) {
+    fun doPopulateMap(map: GoogleMap, hillforts: List<HillfortModel>) {
         map.uiSettings.setZoomControlsEnabled(true)
-        map.setOnMarkerClickListener(view)
-        app.users.getUserHillforts(app.loggedInUserEmail).forEach {
+        hillforts.forEach {
             val loc = LatLng(it.lat, it.lng)
             val options = MarkerOptions().title(it.title).position(loc)
             map.addMarker(options).tag = it.id
@@ -29,6 +25,10 @@ class HillfortMapPresenter(val view: HillfortMapView) {
     fun doMarkerSelected(marker: Marker) {
         val tag = marker.tag as String
         val hillfort = app.users.findHillfortById(userEmail = app.loggedInUserEmail, id = tag)
-        if (hillfort != null) view.showHillfort(hillfort)
+        if (hillfort != null) view?.showHillfort(hillfort)
+    }
+
+    fun loadHillforts() {
+        view?.showHillforts(app.users.getUserHillforts(app.loggedInUserEmail))
     }
 }
