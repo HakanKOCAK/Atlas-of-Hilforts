@@ -50,10 +50,11 @@ class HillfortView : BaseView(), AnkoLogger {
             textViewForVisited.setText(str)
         }
 
-        hillfortLocation.setOnClickListener{
-            presenter.doSetLocation()
+        mapView.getMapAsync {
+            presenter.doConfigureMap(it)
+            it.setOnMapClickListener { presenter.doSetLocation() }
         }
-        mapView.onCreate(savedInstanceState);
+        mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
@@ -76,6 +77,9 @@ class HillfortView : BaseView(), AnkoLogger {
             visited.isChecked = false
             textViewForVisited.setText("")
         }
+
+        lat.setText("%.6f".format(hillfort.lat))
+        lng.setText("%.6f".format(hillfort.lng))
     }
 
 
@@ -129,6 +133,7 @@ class HillfortView : BaseView(), AnkoLogger {
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+        presenter.doResartLocationUpdates()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

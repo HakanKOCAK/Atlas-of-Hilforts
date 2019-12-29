@@ -3,12 +3,15 @@ package com.project.hilforts.views.hillfort
 import android.annotation.SuppressLint
 import android.content.Intent
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.project.hilforts.helpers.checkLocationPermissions
+import com.project.hilforts.helpers.createDefaultLocationRequest
 import com.project.hilforts.helpers.isPermissionGranted
 import com.project.hilforts.helpers.showImagePicker
 import com.project.hilforts.main.MainApp
@@ -25,15 +28,16 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
     var hillfort = HillfortModel()
     var map: GoogleMap? = null
 
-    var defaultLocation = Location(54.189,-4.557, 5.2f)
+    var defaultLocation = Location(53.389,-7.311, 5.2f)
     var edit = false
 
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
+    val locationRequest = createDefaultLocationRequest()
 
     init {
-        if (view.intent.hasExtra("placemark_edit")) {
+        if (view.intent.hasExtra("hillfort_edit")) {
             edit = true
-            hillfort = view.intent.extras?.getParcelable<HillfortModel>("placemark_edit")!!
+            hillfort = view.intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             view.showHillfort(hillfort)
         } else {
             if (checkLocationPermissions(view)) {
@@ -50,7 +54,7 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
     fun locationUpdate(lat: Double, lng: Double) {
         hillfort.lat = lat
         hillfort.lng = lng
-        hillfort.zoom = 15f
+        hillfort.zoom = 10f
         map?.clear()
         map?.uiSettings?.setZoomControlsEnabled(true)
         val options = MarkerOptions().title(hillfort.title).position(LatLng(hillfort.lat, hillfort.lng))
@@ -167,4 +171,18 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
         }
     }
 
+    @SuppressLint("MissingPermission")
+    fun doResartLocationUpdates() {
+        var locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                if (locationResult != null && locationResult.locations != null) {
+                    val l = locationResult.locations.last()
+                    locationUpdate(l.latitude, l.longitude)
+                }
+            }
+        }
+        if (!edit) {
+            locationService.requestLocationUpdates(locationRequest, locationCallback, null)
+        }
+    }
 }

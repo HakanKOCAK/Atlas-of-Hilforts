@@ -40,7 +40,7 @@ class HillfortListPresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun doEditHillfort(hillfort: HillfortModel) {
-        view?.navigateTo(VIEW.HILLFORT, 0, "placemark_edit", hillfort)
+        view?.navigateTo(VIEW.HILLFORT, 0, "hillfort_edit", hillfort)
     }
 
     fun doDeleteHillfort(hillfort: HillfortModel){
