@@ -73,6 +73,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
         basePresenter?.doRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    open fun showLocation(latitude : Double, longitude : Double) {}
     open fun showHillfort(hillfort: HillfortModel) {}
     open fun showHillforts(hillforts: List<HillfortModel>) {}
     open fun showProgress() {}
