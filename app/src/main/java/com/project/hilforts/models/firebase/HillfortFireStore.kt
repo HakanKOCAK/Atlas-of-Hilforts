@@ -92,9 +92,6 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
                 }.addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
                         hillfort.image1 = it.toString()
-                        hillfort.image2 = it.toString()
-                        hillfort.image3 = it.toString()
-                        hillfort.image4 = it.toString()
                         db.child("users").child(userId).child("hillforts").child(hillfort.fbId).setValue(hillfort)
                     }
                 }
@@ -120,10 +117,7 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
                     println(it.message)
                 }.addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
-                        hillfort.image1 = it.toString()
                         hillfort.image2 = it.toString()
-                        hillfort.image3 = it.toString()
-                        hillfort.image4 = it.toString()
                         db.child("users").child(userId).child("hillforts").child(hillfort.fbId).setValue(hillfort)
                     }
                 }
@@ -149,10 +143,7 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
                     println(it.message)
                 }.addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
-                        hillfort.image1 = it.toString()
-                        hillfort.image2 = it.toString()
                         hillfort.image3 = it.toString()
-                        hillfort.image4 = it.toString()
                         db.child("users").child(userId).child("hillforts").child(hillfort.fbId).setValue(hillfort)
                     }
                 }
@@ -178,9 +169,6 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
                     println(it.message)
                 }.addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
-                        hillfort.image1 = it.toString()
-                        hillfort.image2 = it.toString()
-                        hillfort.image3 = it.toString()
                         hillfort.image4 = it.toString()
                         db.child("users").child(userId).child("hillforts").child(hillfort.fbId).setValue(hillfort)
                     }

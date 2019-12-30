@@ -138,22 +138,16 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
                 view?.showHillfort(hillfort)
             }
             IMAGE_REQUEST2 -> {
-                if (data != null) {
-                    hillfort.image2 = data.getData().toString()
-                    view?.showHillfort(hillfort)
-                }
+                hillfort.image2 = data.data.toString()
+                view?.showHillfort(hillfort)
             }
             IMAGE_REQUEST3 -> {
-                if (data != null) {
-                    hillfort.image3 = data.getData().toString()
-                    view?.showHillfort(hillfort)
-                }
+                hillfort.image3 = data.data.toString()
+                view?.showHillfort(hillfort)
             }
             IMAGE_REQUEST4 -> {
-                if (data != null) {
-                    hillfort.image4 = data.getData().toString()
-                    view?.showHillfort(hillfort)
-                }
+                hillfort.image4 = data.data.toString()
+                view?.showHillfort(hillfort)
             }
             LOCATION_REQUEST -> {
                 val location = data.extras?.getParcelable<Location>("location")!!
