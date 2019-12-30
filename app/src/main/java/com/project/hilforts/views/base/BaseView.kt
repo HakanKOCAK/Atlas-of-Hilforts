@@ -32,7 +32,6 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
 
     fun navigateTo(view: VIEW, code: Int = 0, key: String = "", value: Parcelable? = null) {
         var intent = Intent(this, HillfortListView::class.java)
-
         when (view){
             VIEW.LOCATION -> intent = Intent(this, EditLocationView::class.java)
             VIEW.HILLFORT -> intent = Intent(this, HillfortView::class.java)
@@ -79,7 +78,6 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
         basePresenter?.doRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    open fun showLocation(latitude : Double, longitude : Double) {}
     open fun showHillfort(hillfort: HillfortModel) {}
     open fun showLocation(location : Location) {}
     open fun showProgressLogin(){}

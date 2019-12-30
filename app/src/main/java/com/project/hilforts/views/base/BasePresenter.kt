@@ -13,6 +13,5 @@ open class BasePresenter(var view: BaseView) {
     }
 
     open fun onDestroy() {
-
     }
 }

@@ -1,13 +1,9 @@
 package com.project.hilforts.main
 
 import android.app.Application
-import com.google.firebase.auth.FirebaseUser
-import com.project.hilforts.firebase.HillfortFireStore
-import com.project.hilforts.models.HillfortModel
 import com.project.hilforts.models.HillfortStore
+import com.project.hilforts.models.firebase.HillfortFireStore
 import org.jetbrains.anko.AnkoLogger
-import java.util.*
-import kotlin.collections.ArrayList
 
 class MainApp : Application(), AnkoLogger {
 
@@ -15,8 +11,6 @@ class MainApp : Application(), AnkoLogger {
 
     lateinit var loggedInUserEmail: String
     lateinit var loggedInUserPassword: String
-
-    lateinit var user: FirebaseUser
 
     override fun onCreate() {
         super.onCreate()

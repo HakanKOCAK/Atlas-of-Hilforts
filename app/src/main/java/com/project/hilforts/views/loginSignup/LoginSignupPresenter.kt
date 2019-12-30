@@ -2,8 +2,7 @@ package com.project.hilforts.views.loginSignup
 
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
-import com.project.hilforts.firebase.HillfortFireStore
-import com.project.hilforts.models.UserModel
+import com.project.hilforts.models.firebase.HillfortFireStore
 import com.project.hilforts.views.base.BasePresenter
 import com.project.hilforts.views.base.BaseView
 import com.project.hilforts.views.base.VIEW
@@ -39,6 +38,8 @@ class LoginSignupPresenter(view: BaseView) : BasePresenter(view)  {
 
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->
             if (task.isSuccessful) {
+                app.loggedInUserEmail = email
+                app.loggedInUserPassword = password
                 if(fireStore != null){
                     fireStore!!.fetchHillforts {
                         view?.hideProgressLogin()
@@ -72,6 +73,8 @@ class LoginSignupPresenter(view: BaseView) : BasePresenter(view)  {
 
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->
                 if (task.isSuccessful) {
+                    app.loggedInUserEmail = email
+                    app.loggedInUserPassword = password
                     view?.hideProgressSignup()
                     view?.navigateTo(VIEW.LIST)
                 } else {

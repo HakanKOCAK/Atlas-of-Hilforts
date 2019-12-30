@@ -13,8 +13,8 @@ class LoginSignupView :  BaseView(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
 
-       presenter = initPresenter (LoginSignupPresenter(this)) as LoginSignupPresenter
-        
+        presenter = initPresenter (LoginSignupPresenter(this)) as LoginSignupPresenter
+
         login_text.setOnClickListener(){
             presenter.doShowLogin()
         }

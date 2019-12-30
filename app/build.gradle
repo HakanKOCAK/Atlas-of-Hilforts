@@ -42,9 +42,11 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.1.0'
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.firebase:firebase-database:16.0.4'
+    implementation 'com.google.firebase:firebase-storage:16.0.4'
     kapt 'androidx.room:room-compiler:2.1.0'
     implementation 'org.jetbrains.anko:anko-commons:0.10.8'
     implementation "com.google.android.gms:play-services-location:16.0.0"
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     testImplementation 'junit:junit:4.12'
