@@ -36,3 +36,5 @@ app/src/debug/res/values/google_maps_api.xml
 .Spotlight-V100
 .Trashes
 Thumbs.db
+
+app/google-services.json

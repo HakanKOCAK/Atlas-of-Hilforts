@@ -28,9 +28,8 @@ class HillfortListView : BaseView(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hilfort_list)
         setSupportActionBar(toolBar)
-        val actionBar = supportActionBar
-
         init(toolBar, false)
+        val actionBar = supportActionBar
         presenter = initPresenter(HillfortListPresenter(this)) as HillfortListPresenter
 
         if(isHome){
@@ -55,7 +54,6 @@ class HillfortListView : BaseView(),
         drawerToggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         presenter.loadHillforts()

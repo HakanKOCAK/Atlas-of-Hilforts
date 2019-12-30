@@ -2,7 +2,6 @@ package com.project.hilforts.views.loginSignup
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import com.project.hilforts.R
 import com.project.hilforts.views.base.BaseView
 import kotlinx.android.synthetic.main.login_activity.*
@@ -23,6 +22,9 @@ class LoginSignupView :  BaseView(){
         signup_text.setOnClickListener(){
             presenter.doShowSignup()
         }
+
+        progressBarLogin.visibility = View.GONE
+        progressBarSignup.visibility = View.GONE
     }
 
     fun onLogin(v: View){
@@ -31,5 +33,21 @@ class LoginSignupView :  BaseView(){
 
     fun onSignUp(v: View){
         presenter.doOnSignup()
+    }
+
+    override fun showProgressLogin() {
+        progressBarLogin.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressLogin() {
+        progressBarLogin.visibility = View.GONE
+    }
+
+    override fun showProgressSignup() {
+        progressBarSignup.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressSignup() {
+        progressBarSignup.visibility = View.VISIBLE
     }
 }
