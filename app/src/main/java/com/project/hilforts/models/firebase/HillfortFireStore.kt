@@ -34,7 +34,7 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
         key?.let {
             hillfort.fbId = key
             hillforts.add(hillfort)
-            db.child("user").child(userId).child("hillforts").child(key).setValue(hillfort)
+            db.child("users").child(userId).child("hillforts").child(key).setValue(hillfort)
         }
     }
 
@@ -48,7 +48,7 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
             foundHillfort.dateVisited = hillfort.dateVisited
             foundHillfort.additionalNote = hillfort.additionalNote
         }
-        db.child("user").child(userId).child("hillforts").child(hillfort.fbId).setValue(hillfort)
+        db.child("users").child(userId).child("hillforts").child(hillfort.fbId).setValue(hillfort)
 
         if ((hillfort.image1.length) > 0 && (hillfort.image1[0] != 'h')) {
             updateImage1(hillfort)
@@ -65,7 +65,7 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
     }
 
     override fun delete(hillfort: HillfortModel) {
-        db.child("user").child(userId).child("hillforts").child(hillfort.fbId).removeValue()
+        db.child("users").child(userId).child("hillforts").child(hillfort.fbId).removeValue()
         hillforts.remove(hillfort)
     }
 
