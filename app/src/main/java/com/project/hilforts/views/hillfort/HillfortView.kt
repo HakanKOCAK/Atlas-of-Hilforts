@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import com.project.hilforts.R
 import com.project.hilforts.helpers.readImageFromPath
@@ -66,10 +67,10 @@ class HillfortView : BaseView(), AnkoLogger {
         hillfortTitle.setText(hillfort.title)
         description.setText(hillfort.description)
         additionalNote.setText(hillfort.additionalNote)
-        if(hillfort.image1 != ""){hillfortImage1.setImageBitmap(readImageFromPath(this, hillfort.image1))}
-        if(hillfort.image2 != ""){hillfortImage2.setImageBitmap(readImageFromPath(this, hillfort.image2))}
-        if(hillfort.image3 != ""){hillfortImage3.setImageBitmap(readImageFromPath(this, hillfort.image3))}
-        if(hillfort.image4 != ""){hillfortImage4.setImageBitmap(readImageFromPath(this, hillfort.image4))}
+        if(hillfort.image1 != ""){Glide.with(this).load(hillfort.image1).into(hillfortImage1)}
+        if(hillfort.image2 != ""){Glide.with(this).load(hillfort.image2).into(hillfortImage2)}
+        if(hillfort.image3 != ""){Glide.with(this).load(hillfort.image3).into(hillfortImage3)}
+        if(hillfort.image4 != ""){Glide.with(this).load(hillfort.image4).into(hillfortImage1)}
 
         if(hillfort.visited){
             visited.isChecked = true

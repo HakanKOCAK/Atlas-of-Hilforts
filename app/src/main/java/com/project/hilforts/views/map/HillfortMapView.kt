@@ -2,6 +2,7 @@ package com.project.hilforts.views.map
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -37,16 +38,16 @@ class HillfortMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     }
 
     override fun showHillfort(hillfort: HillfortModel){
-        currentTitle.text = hillfort!!.title
-        currentDescription.text = hillfort!!.description
-        if (hillfort!!.image1 != ""){
-            currentImage.setImageBitmap(readImageFromPath(this, hillfort!!.image1))
-        } else if (hillfort!!.image2 != ""){
-            currentImage.setImageBitmap(readImageFromPath(this, hillfort!!.image2))
-        } else if (hillfort!!.image3 != ""){
-            currentImage.setImageBitmap(readImageFromPath(this, hillfort!!.image3))
+        currentTitle.text = hillfort.title
+        currentDescription.text = hillfort.description
+        if (hillfort.image1 != ""){
+            Glide.with(this).load(hillfort.image1).into(currentImage)
+        } else if (hillfort.image2 != ""){
+            Glide.with(this).load(hillfort.image2).into(currentImage)
+        } else if (hillfort.image3 != ""){
+            Glide.with(this).load(hillfort.image3).into(currentImage)
         } else {
-            currentImage.setImageBitmap(readImageFromPath(this, hillfort!!.image4))
+            Glide.with(this).load(hillfort.image4).into(currentImage)
         }
     }
 
