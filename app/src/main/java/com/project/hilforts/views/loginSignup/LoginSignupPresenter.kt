@@ -43,7 +43,13 @@ class LoginSignupPresenter(view: BaseView) : BasePresenter(view)  {
         val password = view?.signup_password.text.toString()
         val confirmPassword = view?.signup_confirm_password.text.toString()
 
-        if(password == confirmPassword){
+        if (email = "" || password = "" || confirmPassword = ""){
+            view?.toast("Please Fill the Required Fields")
+        }else if(!isEmailValid(email)){
+            view?.toast("Please Enter a Valid Email Address")
+        }else if (password != confirmPassword){
+            view?.toast("Passwords do not match")
+        }else (password == confirmPassword){
             val user = UserModel(email, password, app.getDefaultHillforts())
 
             if(app.users.findAll().find { u -> u.email == email} == null) {
@@ -55,5 +61,9 @@ class LoginSignupPresenter(view: BaseView) : BasePresenter(view)  {
                 view?.toast("User Already Exists")
             }
         }
+    }
+
+    fun isEmailValid(email: String): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }

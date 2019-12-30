@@ -16,7 +16,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-val JSON_FILE = "placemarks.json"
+val JSON_FILE = "hillforts.json"
 val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
 val listType = object : TypeToken<java.util.ArrayList<UserModel>>() {}.type
 
@@ -49,7 +49,6 @@ class UserJSONStore : UserStore, AnkoLogger {
         serialize()
     }
     override fun createUserHillfort(userEmail: String, hillfort: HillfortModel) {
-        hillfort.id = generateRandomId()
         getUserHillforts(userEmail).add(hillfort)
         logAll(userEmail)
         serialize()
