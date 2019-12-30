@@ -9,7 +9,7 @@ class SettingsPresenter(view: BaseView) : BasePresenter(view) {
 
     fun doSetView(){
         var count = 0
-        val hillforts = app.users.getUserHillforts(app.loggedInUserEmail)
+        val hillforts = app.hillforts.findAll()
         for(h in hillforts){
             if(h.visited) count += 1
         }

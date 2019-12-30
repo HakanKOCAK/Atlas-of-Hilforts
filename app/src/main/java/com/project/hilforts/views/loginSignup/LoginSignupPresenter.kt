@@ -2,6 +2,7 @@ package com.project.hilforts.views.loginSignup
 
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
+import com.project.hilforts.firebase.HillfortFireStore
 import com.project.hilforts.models.UserModel
 import com.project.hilforts.views.base.BasePresenter
 import com.project.hilforts.views.base.BaseView
@@ -12,7 +13,14 @@ import org.jetbrains.anko.toast
 class LoginSignupPresenter(view: BaseView) : BasePresenter(view)  {
 
     var auth: FirebaseAuth = FirebaseAuth.getInstance()
+    var fireStore: HillfortFireStore? = null
 
+
+    init{
+        if(app.hillforts is HillfortFireStore){
+            fireStore = app.hillforts as HillfortFireStore
+        }
+    }
     fun doShowLogin(){
         view?.signup_layout.visibility = View.GONE
         view?.login_layout.visibility = View.VISIBLE
@@ -31,14 +39,19 @@ class LoginSignupPresenter(view: BaseView) : BasePresenter(view)  {
 
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->
             if (task.isSuccessful) {
-                app.user = FirebaseAuth.getInstance().currentUser!!
-                app.loggedInUserEmail = email
-                app.loggedInUserPassword = password
-                view?.navigateTo(VIEW.LIST)
+                if(fireStore != null){
+                    fireStore!!.fetchHillforts {
+                        view?.hideProgressLogin()
+                        view?.navigateTo(VIEW.LIST)
+                    }
+                } else {
+                    view?.hideProgressLogin()
+                    view?.navigateTo(VIEW.LIST)
+                }
             } else {
-                view?.toast("Sign Up Failed: ${task.exception?.message}")
+                view?.hideProgressLogin()
+                view?.toast("Login Failed: ${task.exception?.message}")
             }
-            view?.hideProgressLogin()
         }
     }
 
@@ -59,15 +72,13 @@ class LoginSignupPresenter(view: BaseView) : BasePresenter(view)  {
 
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->
                 if (task.isSuccessful) {
-                    val user = UserModel(email, password, app.getDefaultHillforts())
-                    app.loggedInUserEmail = email
-                    app.loggedInUserPassword = password
-                    app.users.add(user)
+                    view?.hideProgressSignup()
                     view?.navigateTo(VIEW.LIST)
                 } else {
+                    view?.hideProgressSignup()
                     view?.toast("Sign Up Failed: ${task.exception?.message}")
                 }
-                view?.hideProgress()
+
             }
         }
     }
@@ -78,6 +89,7 @@ class LoginSignupPresenter(view: BaseView) : BasePresenter(view)  {
 
     fun doLogout() {
         FirebaseAuth.getInstance().signOut()
+        app.hillforts.clear()
         view?.navigateTo(VIEW.LOGINSIGNUP)
     }
 }

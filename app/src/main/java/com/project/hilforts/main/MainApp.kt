@@ -1,17 +1,17 @@
 package com.project.hilforts.main
 
 import android.app.Application
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.project.hilforts.firebase.HillfortFireStore
 import com.project.hilforts.models.HillfortModel
-import com.project.hilforts.models.json.UserJSONStore
+import com.project.hilforts.models.HillfortStore
 import org.jetbrains.anko.AnkoLogger
 import java.util.*
 import kotlin.collections.ArrayList
 
 class MainApp : Application(), AnkoLogger {
 
-    lateinit var users: UserJSONStore
+    lateinit var hillforts: HillfortStore
 
     lateinit var loggedInUserEmail: String
     lateinit var loggedInUserPassword: String
@@ -20,10 +20,10 @@ class MainApp : Application(), AnkoLogger {
 
     override fun onCreate() {
         super.onCreate()
-        users = UserJSONStore(this)
+        hillforts = HillfortFireStore(applicationContext)
     }
 
-    fun getDefaultHillforts(): ArrayList<HillfortModel> {
+    /*fun getDefaultHillforts(): ArrayList<HillfortModel> {
         var hillforts = ArrayList<HillfortModel>()
 
         hillforts.add(HillfortModel(title = "Ballinkillin", description = "Contour Fort", lat = 52.653029, lng = -6.9333, zoom = 13f))
@@ -39,5 +39,5 @@ class MainApp : Application(), AnkoLogger {
         hillforts.add(HillfortModel(title = "Clonmantagh", description = "Level Terrain Fort", lat = 52.73984, lng = -7.50817, zoom = 13f))
 
         return hillforts
-    }
+    }*/
 }

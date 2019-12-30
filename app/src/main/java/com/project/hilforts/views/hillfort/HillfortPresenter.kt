@@ -19,7 +19,9 @@ import com.project.hilforts.models.HillfortModel
 import com.project.hilforts.models.Location
 import com.project.hilforts.views.base.*
 import com.project.hilforts.views.editLocation.EditLocationView
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.uiThread
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -48,18 +50,16 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
 
     fun doConfigureMap(m: GoogleMap) {
         map = m
-        locationUpdate(hillfort.lat, hillfort.lng)
+        locationUpdate(hillfort.location)
     }
 
-    fun locationUpdate(lat: Double, lng: Double) {
-        hillfort.lat = lat
-        hillfort.lng = lng
-        hillfort.zoom = 10f
+    fun locationUpdate(location: Location) {
+        hillfort.location = location
         map?.clear()
         map?.uiSettings?.setZoomControlsEnabled(true)
-        val options = MarkerOptions().title(hillfort.title).position(LatLng(hillfort.lat, hillfort.lng))
+        val options = MarkerOptions().title(hillfort.title).position(LatLng(hillfort.location.lat, hillfort.location.lng))
         map?.addMarker(options)
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hillfort.lat, hillfort.lng), hillfort.zoom))
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hillfort.location.lat, hillfort.location.lng), hillfort.location.zoom))
         view?.showHillfort(hillfort)
     }
 
@@ -68,9 +68,9 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
         hillfort.description = description
         hillfort.additionalNote = additionalNote
         if (edit) {
-            app.users.updateUserHillfort(app.loggedInUserEmail, hillfort.copy())
+            app.hillforts.update(hillfort)
         } else {
-            app.users.createUserHillfort(app.loggedInUserEmail, hillfort.copy())
+            app.hillforts.create(hillfort)
         }
         view?.finish()
     }
@@ -80,8 +80,13 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun doDelete() {
-        app.users.deleteUserHillfort(app.loggedInUserEmail,hillfort)
-        view?.finish()
+        doAsync {
+            app.hillforts.delete(hillfort)
+            uiThread {
+                view?.finish()
+            }
+        }
+
     }
 
     fun doSelectImage(num: Int) {
@@ -105,7 +110,7 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun doSetLocation() {
-        view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(hillfort.lat, hillfort.lng, hillfort.zoom))
+        view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(hillfort.location.lat, hillfort.location.lng, hillfort.location.zoom))
     }
 
     fun doSetVisited() : String{
@@ -148,10 +153,8 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
             }
             LOCATION_REQUEST -> {
                 val location = data.extras?.getParcelable<Location>("location")!!
-                hillfort.lat = location.lat
-                hillfort.lng = location.lng
-                hillfort.zoom = location.zoom
-                locationUpdate(hillfort.lat, hillfort.lng)
+                hillfort.location = location
+                locationUpdate(location)
             }
         }
     }
@@ -160,14 +163,14 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
         if (isPermissionGranted(requestCode, grantResults)) {
             doSetCurrentLocation()
         } else {
-            locationUpdate(defaultLocation.lat, defaultLocation.lng)
+            locationUpdate(defaultLocation)
         }
     }
 
     @SuppressLint("MissingPermission")
     fun doSetCurrentLocation() {
         locationService.lastLocation.addOnSuccessListener {
-            locationUpdate(it.latitude, it.longitude)
+            locationUpdate(Location(it.latitude, it.longitude))
         }
     }
 
@@ -177,7 +180,7 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
             override fun onLocationResult(locationResult: LocationResult?) {
                 if (locationResult != null && locationResult.locations != null) {
                     val l = locationResult.locations.last()
-                    locationUpdate(l.latitude, l.longitude)
+                    locationUpdate(Location(l.latitude, l.longitude))
                 }
             }
         }

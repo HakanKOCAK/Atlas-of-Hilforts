@@ -10,16 +10,18 @@ import com.project.hilforts.main.MainApp
 import com.project.hilforts.models.HillfortModel
 import com.project.hilforts.views.base.BasePresenter
 import com.project.hilforts.views.base.BaseView
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class HillfortMapPresenter(view: BaseView) : BasePresenter(view){
 
     fun doPopulateMap(map: GoogleMap, hillforts: List<HillfortModel>) {
         map.uiSettings.setZoomControlsEnabled(true)
         hillforts.forEach {
-            val loc = LatLng(it.lat, it.lng)
+            val loc = LatLng(it.location.lat, it.location.lng)
             val options = MarkerOptions().title(it.title).position(loc)
             map.addMarker(options).tag = it
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
         }
     }
 
@@ -29,6 +31,11 @@ class HillfortMapPresenter(view: BaseView) : BasePresenter(view){
     }
 
     fun loadHillforts() {
-        view?.showHillforts(app.users.getUserHillforts(app.loggedInUserEmail))
+        doAsync {
+            val hillforts = app.hillforts.findAll()
+            uiThread {
+                view?.showHillforts(hillforts)
+            }
+        }
     }
 }

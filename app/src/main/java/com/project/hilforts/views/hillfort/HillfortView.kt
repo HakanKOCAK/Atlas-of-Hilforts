@@ -8,6 +8,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.project.hilforts.R
 import com.project.hilforts.helpers.readImageFromPath
 import com.project.hilforts.models.HillfortModel
+import com.project.hilforts.models.Location
 import com.project.hilforts.views.base.BaseView
 import kotlinx.android.synthetic.main.activity_hillforts.*
 import kotlinx.android.synthetic.main.activity_hillforts.description
@@ -78,10 +79,13 @@ class HillfortView : BaseView(), AnkoLogger {
             textViewForVisited.setText("")
         }
 
-        lat.setText("%.6f".format(hillfort.lat))
-        lng.setText("%.6f".format(hillfort.lng))
+        this.showLocation(hillfort.location)
     }
 
+    override fun showLocation(location: Location) {
+        lat.setText("%.6f".format(location.lat))
+        lng.setText("%.6f".format(location.lng))
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_hillfort, menu)

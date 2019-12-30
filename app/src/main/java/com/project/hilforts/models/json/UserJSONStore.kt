@@ -1,4 +1,4 @@
-package com.project.hilforts.models.json
+/*package com.project.hilforts.models.json
 
 import android.content.Context
 import org.jetbrains.anko.AnkoLogger
@@ -51,7 +51,7 @@ class UserJSONStore : UserStore, AnkoLogger {
     }
 
     override fun updateUserHillfort(userEmail: String, hillfort: HillfortModel) {
-        var foundHillfort: HillfortModel? = getUserHillforts(userEmail).find { p -> p.id == hillfort.id }
+        var foundHillfort: HillfortModel? = getUserHillforts(userEmail).find { p -> p.fbId == hillfort.fbId }
         if(foundHillfort != null){
             foundHillfort.title = hillfort.title
             foundHillfort.description = hillfort.description
@@ -106,4 +106,4 @@ class UserJSONStore : UserStore, AnkoLogger {
     override fun clear() {
         hillforts.clear()
     }
-}
+}*/

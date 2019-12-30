@@ -9,14 +9,17 @@ import com.project.hilforts.views.base.BasePresenter
 import com.project.hilforts.views.base.BaseView
 import com.project.hilforts.views.base.VIEW
 import com.project.hilforts.views.hillfort.HillfortView
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.startActivityForResult
+import org.jetbrains.anko.*
 
 class HillfortListPresenter(view: BaseView) : BasePresenter(view) {
 
     fun loadHillforts() {
-        view?.showHillforts(app.users.getUserHillforts(app.loggedInUserEmail))
+        doAsync {
+            val hillforts = app.hillforts.findAll()
+            uiThread {
+                view?.showHillforts(hillforts)
+            }
+        }
     }
 
     fun doShowHillfortsMap() {
@@ -44,7 +47,7 @@ class HillfortListPresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun doDeleteHillfort(hillfort: HillfortModel){
-        app.users.deleteUserHillfort(app.loggedInUserEmail, hillfort)
+        app.hillforts.delete(hillfort)
         view?.navigateTo(VIEW.LIST)
     }
 }
