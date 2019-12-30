@@ -73,11 +73,8 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
     }
 
     /*fun updateImage(hillfort: HillfortModel, num: Int){
-
         var fileName = File(hillfort.image1)
-
         var bitmap = readImageFromPath(context, hillfort.image1)
-
         if(num == 1){
             fileName = File(hillfort.image1)
             bitmap = readImageFromPath(context, hillfort.image1)
@@ -91,13 +88,10 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
             fileName = File(hillfort.image4)
             bitmap = readImageFromPath(context, hillfort.image4)
         }
-
         if (hillfort.image1 != "" || hillfort.image2 != "" || hillfort.image3 != "" || hillfort.image4 != "") {
             val imageName = fileName.getName()
-
             val imageRef = st.child(userId + '/' + imageName)
             val baos = ByteArrayOutputStream()
-
             bitmap?.let {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                 val data = baos.toByteArray()
