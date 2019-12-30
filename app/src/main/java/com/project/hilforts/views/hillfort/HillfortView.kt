@@ -70,7 +70,7 @@ class HillfortView : BaseView(), AnkoLogger {
         if(hillfort.image1 != ""){Glide.with(this).load(hillfort.image1).into(hillfortImage1)}
         if(hillfort.image2 != ""){Glide.with(this).load(hillfort.image2).into(hillfortImage2)}
         if(hillfort.image3 != ""){Glide.with(this).load(hillfort.image3).into(hillfortImage3)}
-        if(hillfort.image4 != ""){Glide.with(this).load(hillfort.image4).into(hillfortImage1)}
+        if(hillfort.image4 != ""){Glide.with(this).load(hillfort.image4).into(hillfortImage4)}
 
         if(hillfort.visited){
             visited.isChecked = true
