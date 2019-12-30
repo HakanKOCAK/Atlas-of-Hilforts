@@ -12,7 +12,6 @@ import com.project.hilforts.helpers.write
 import com.project.hilforts.models.HillfortModel
 import com.project.hilforts.models.UserModel
 import com.project.hilforts.models.UserStore
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -20,13 +19,10 @@ val JSON_FILE = "hillforts.json"
 val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
 val listType = object : TypeToken<java.util.ArrayList<UserModel>>() {}.type
 
-fun generateRandomId(): String {
-    return UUID.randomUUID().toString()
-}
-
 class UserJSONStore : UserStore, AnkoLogger {
     var users = ArrayList<UserModel>()
     val context: Context
+    var hillforts = mutableListOf<HillfortModel>()
 
     constructor (context: Context) {
         this.context = context
@@ -105,5 +101,9 @@ class UserJSONStore : UserStore, AnkoLogger {
     private fun deserialize() {
         val jsonString = read(context, JSON_FILE)
         users = Gson().fromJson(jsonString, listType)
+    }
+
+    override fun clear() {
+        hillforts.clear()
     }
 }

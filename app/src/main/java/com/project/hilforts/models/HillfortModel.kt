@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class HillfortModel(var id: String="",
+data class HillfortModel(var fbId: String="",
                          var title: String = "",
                          var description: String = "",
                          var image1: String = "",
