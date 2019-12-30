@@ -67,12 +67,16 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
         hillfort.title = title
         hillfort.description = description
         hillfort.additionalNote = additionalNote
-        if (edit) {
-            app.hillforts.update(hillfort)
-        } else {
-            app.hillforts.create(hillfort)
+        doAsync {
+            if (edit) {
+                app.hillforts.update(hillfort)
+            } else {
+                app.hillforts.create(hillfort)
+            }
+            uiThread {
+                view?.finish()
+            }
         }
-        view?.finish()
     }
 
     fun doCancel() {
