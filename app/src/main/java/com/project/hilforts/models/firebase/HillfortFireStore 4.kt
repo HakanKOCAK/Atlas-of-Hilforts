@@ -48,19 +48,20 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
             foundHillfort.additionalNote = hillfort.additionalNote
         }
         db.child("user").child(userId).child("hillforts").child(hillfort.fbId).setValue(hillfort)
-        if ((hillfort.image1.length) > 0 && (hillfort.image1[0] != 'h')) {
-            updateImage(hillfort)
-        }
 
-        /*if ((hillfort.image1.length) > 0 && (hillfort.image1[0] != 'h')) {
+
+        if ((hillfort.image1.length) > 0 && (hillfort.image1[0] != 'h')) {
             updateImage(hillfort, 1)
-        } else if ((hillfort.image2.length) > 0 && (hillfort.image2[0] != 'h')){
+        }
+        if ((hillfort.image2.length) > 0 && (hillfort.image2[0] != 'h')) {
             updateImage(hillfort, 2)
-        } else if ((hillfort.image3.length) > 0 && (hillfort.image3[0] != 'h')){
+        }
+        if ((hillfort.image3.length) > 0 && (hillfort.image3[0] != 'h')){
             updateImage(hillfort, 3)
-        } else if ((hillfort.image4.length) > 0 && (hillfort.image4[0] != 'h')){
+        }
+        if ((hillfort.image4.length) > 0 && (hillfort.image4[0] != 'h')){
             updateImage(hillfort, 4)
-        }*/
+        }
     }
 
     override fun delete(hillfort: HillfortModel) {
@@ -72,13 +73,11 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
         hillforts.clear()
     }
 
-    /*fun updateImage(hillfort: HillfortModel, num: Int){
+    fun updateImage(hillfort: HillfortModel, num: Int){
         var fileName = File(hillfort.image1)
         var bitmap = readImageFromPath(context, hillfort.image1)
-        if(num == 1){
-            fileName = File(hillfort.image1)
-            bitmap = readImageFromPath(context, hillfort.image1)
-        } else if(num == 2){
+
+        if(num == 2){
             fileName = File(hillfort.image2)
             bitmap = readImageFromPath(context, hillfort.image2)
         } else if(num == 3){
@@ -106,7 +105,7 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
                 }
             }
         }
-    }*/
+    }
 
     fun updateImage(hillfort: HillfortModel){
 
