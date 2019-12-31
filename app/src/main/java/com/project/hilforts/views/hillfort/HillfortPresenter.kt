@@ -14,13 +14,10 @@ import com.project.hilforts.helpers.checkLocationPermissions
 import com.project.hilforts.helpers.createDefaultLocationRequest
 import com.project.hilforts.helpers.isPermissionGranted
 import com.project.hilforts.helpers.showImagePicker
-import com.project.hilforts.main.MainApp
 import com.project.hilforts.models.HillfortModel
 import com.project.hilforts.models.Location
 import com.project.hilforts.views.base.*
-import com.project.hilforts.views.editLocation.EditLocationView
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.uiThread
 import java.text.SimpleDateFormat
 import java.util.*
@@ -82,16 +79,6 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
 
     fun doCancel() {
         view?.finish()
-    }
-
-    fun doDelete() {
-        doAsync {
-            app.hillforts.delete(hillfort)
-            uiThread {
-                view?.finish()
-            }
-        }
-
     }
 
     fun doSelectImage(num: Int) {

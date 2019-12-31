@@ -47,7 +47,11 @@ class HillfortListPresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun doDeleteHillfort(hillfort: HillfortModel){
-        app.hillforts.delete(hillfort)
-        view?.navigateTo(VIEW.LIST)
+        doAsync {
+            app.hillforts.delete(hillfort)
+            uiThread {
+                view?.navigateTo(VIEW.LIST)
+            }
+        }
     }
 }

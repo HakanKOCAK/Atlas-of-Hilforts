@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_hillforts.description
 import kotlinx.android.synthetic.main.activity_hillforts.hillfortTitle
 import kotlinx.android.synthetic.main.activity_hillforts.visited
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 
 class HillfortView : BaseView(), AnkoLogger {
@@ -63,10 +64,10 @@ class HillfortView : BaseView(), AnkoLogger {
         description.setText(hillfort.description)
         additionalNote.setText(hillfort.additionalNote)
 
-        if(hillfort.image1 != ""){Glide.with(this).load(hillfort.image1).into(hillfortImage1)}
-        if(hillfort.image2 != ""){Glide.with(this).load(hillfort.image2).into(hillfortImage2)}
-        if(hillfort.image3 != ""){Glide.with(this).load(hillfort.image3).into(hillfortImage3)}
-        if(hillfort.image4 != ""){Glide.with(this).load(hillfort.image4).into(hillfortImage4)}
+        if(hillfort.image1 != ""){Glide.with(getApplicationContext()).load(hillfort.image1).into(hillfortImage1)}
+        if(hillfort.image2 != ""){Glide.with(getApplicationContext()).load(hillfort.image2).into(hillfortImage2)}
+        if(hillfort.image3 != ""){Glide.with(getApplicationContext()).load(hillfort.image3).into(hillfortImage3)}
+        if(hillfort.image4 != ""){Glide.with(getApplicationContext()).load(hillfort.image4).into(hillfortImage4)}
 
         if(hillfort.visited){
             visited.isChecked = true
@@ -98,6 +99,7 @@ class HillfortView : BaseView(), AnkoLogger {
                 if(hillfortTitle.text.toString().isEmpty()){
                     toast(R.string.enter_hillfort_title)
                 } else {
+                    info ("DoaddorsaveCalled")
                     presenter.doAddOrSave(hillfortTitle.text.toString(), description.text.toString(), additionalNote.text.toString())
                 }
             }
