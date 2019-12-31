@@ -1,7 +1,11 @@
 package com.project.hilforts.main
 
 import android.app.Application
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.project.hilforts.models.HillfortModel
 import com.project.hilforts.models.HillfortStore
+import com.project.hilforts.models.Location
 import com.project.hilforts.models.firebase.HillfortFireStore
 import org.jetbrains.anko.AnkoLogger
 
@@ -17,21 +21,38 @@ class MainApp : Application(), AnkoLogger {
         hillforts = HillfortFireStore(applicationContext)
     }
 
-    /*fun getDefaultHillforts(): ArrayList<HillfortModel> {
-        var hillforts = ArrayList<HillfortModel>()
+    fun setAndGetDefaultHillforts(){
+        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+        val db = FirebaseDatabase.getInstance().reference
 
-        hillforts.add(HillfortModel(title = "Ballinkillin", description = "Contour Fort", lat = 52.653029, lng = -6.9333, zoom = 13f))
-        hillforts.add(HillfortModel(title = "Gortacrossig", description = "Promontory Fort", lat = 51.48747, lng = -9.21048, zoom = 13f))
-        hillforts.add(HillfortModel(title = "Largysillagh", description = "Promontory Fort", lat = 54.62661, lng = -8.51306, zoom = 13f))
-        hillforts.add(HillfortModel(title = "Earlspark", description = "Contour Fort", lat = 53.17213, lng = -8.54161, zoom = 13f))
-        hillforts.add(HillfortModel(title = "Muckross", description = "Promontory Fort", lat = 54.60892, lng = -8.59217, zoom = 13f))
-        hillforts.add(HillfortModel(title = "Howth", description = "Promontory Fort", lat = 53.36498, lng = -6.05573, zoom = 13f))
-        hillforts.add(HillfortModel(title = "Culoort", description = "Promontory Fort", lat = 55.33215, lng = -7.35183, zoom = 13f))
-        hillforts.add(HillfortModel(title = "Redford Glebe", description = "Contour Fort", lat = 55.29004, lng = -7.12054, zoom = 13f))
-        hillforts.add(HillfortModel(title = "Knockanacuig", description = "Contour Fort", lat = 52.27088, lng = -9.72976, zoom = 13f))
-        hillforts.add(HillfortModel(title = "Kill Hill", description = "Multiple Enclosure Hillfort", lat = 53.24759, lng = -6.57669, zoom = 13f))
-        hillforts.add(HillfortModel(title = "Clonmantagh", description = "Level Terrain Fort", lat = 52.73984, lng = -7.50817, zoom = 13f))
+        val key1 = db.child("users").child(userId).child("hillforts").push().key
+        key1?.let{
+            val hillfort = HillfortModel(fbId = key1, title = "Ballinkillin", description = "Contour Fort", location = Location(lat = 52.653029, lng = -6.9333, zoom = 13f))
+            db.child("users").child(userId).child("hillforts").child(key1).setValue(hillfort)
+        }
 
-        return hillforts
-    }*/
+        val key2 = db.child("users").child(userId).child("hillforts").push().key
+        key2?.let{
+            val hillfort = HillfortModel(fbId = key2, title = "Gortacrossig", description = "Promontory Fort", location = Location(lat = 51.48747, lng = -9.21048, zoom = 13f))
+            db.child("users").child(userId).child("hillforts").child(key2).setValue(hillfort)
+        }
+
+        val key3 = db.child("users").child(userId).child("hillforts").push().key
+        key3?.let {
+            val hillfort = HillfortModel(fbId = key3, title = "Largysillagh", description = "Promontory Fort", location = Location(lat = 54.62661, lng = -8.51306, zoom = 13f))
+            db.child("users").child(userId).child("hillforts").child(key3).setValue(hillfort)
+        }
+
+        val key4 = db.child("users").child(userId).child("hillforts").push().key
+        key4?.let{
+            val hillfort = HillfortModel(fbId = key4, title = "Earlspark", description = "Contour Fort", location = Location(lat = 53.17213, lng = -8.54161, zoom = 13f))
+            db.child("users").child(userId).child("hillforts").child(key4).setValue(hillfort)
+        }
+
+        val key5 = db.child("users").child(userId).child("hillforts").push().key
+        key5?.let {
+            val hillfort = HillfortModel(fbId = key5, title = "Muckross", description = "Promontory Fort", location = Location(lat = 54.60892, lng = -8.59217, zoom = 13f))
+            db.child("users").child(userId).child("hillforts").child(key5).setValue(hillfort)
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.project.hilforts.views.hillfortList
 
+import com.google.firebase.auth.FirebaseAuth
 import com.project.hilforts.views.map.HillfortMapView
 import com.project.hilforts.views.loginSignup.LoginSignupView
 import com.project.hilforts.views.settings.SettingsView
@@ -38,7 +39,9 @@ class HillfortListPresenter(view: BaseView) : BasePresenter(view) {
         view?.navigateTo(VIEW.SETTINGS)
     }
 
-    fun doLogOut(){
+    fun doLogout() {
+        FirebaseAuth.getInstance().signOut()
+        app.hillforts.clear()
         view?.navigateTo(VIEW.LOGINSIGNUP)
     }
 

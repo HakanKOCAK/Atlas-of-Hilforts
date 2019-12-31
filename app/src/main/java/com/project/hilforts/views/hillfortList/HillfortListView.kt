@@ -13,6 +13,7 @@ import com.project.hilforts.models.HillfortModel
 import com.project.hilforts.views.base.BaseView
 import kotlinx.android.synthetic.main.activity_hilfort_list.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import java.util.ArrayList
 
 class HillfortListView : BaseView(),
     HillfortListener, NavigationView.OnNavigationItemSelectedListener{
@@ -56,7 +57,9 @@ class HillfortListView : BaseView(),
         nav_view.setNavigationItemSelectedListener(this)
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
+
         presenter.loadHillforts()
+
     }
 
     override fun showHillforts(hillforts: List<HillfortModel>) {
@@ -97,7 +100,7 @@ class HillfortListView : BaseView(),
                 presenter.doShowSettingsScreen()
             }
             R.id.logout -> {
-                presenter.doLogOut()
+                presenter.doLogout()
             }
             R.id.delete -> {
                 isHome = false

@@ -7,7 +7,9 @@ import com.project.hilforts.views.base.BasePresenter
 import com.project.hilforts.views.base.BaseView
 import com.project.hilforts.views.base.VIEW
 import kotlinx.android.synthetic.main.login_activity.*
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
 
 class LoginSignupPresenter(view: BaseView) : BasePresenter(view)  {
 
@@ -65,18 +67,26 @@ class LoginSignupPresenter(view: BaseView) : BasePresenter(view)  {
 
         if (email == "" || password == "" || confirmPassword == ""){
             view?.toast("Please Fill the Required Fields")
+            view?.hideProgressSignup()
         }else if(!isEmailValid(email)){
             view?.toast("Please Enter a Valid Email Address")
+            view?.hideProgressSignup()
         }else if (password != confirmPassword){
             view?.toast("Passwords do not match")
+            view?.hideProgressSignup()
         }else if (password == confirmPassword){
 
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->
                 if (task.isSuccessful) {
                     app.loggedInUserEmail = email
                     app.loggedInUserPassword = password
-                    view?.hideProgressSignup()
-                    view?.navigateTo(VIEW.LIST)
+                    app.setAndGetDefaultHillforts()
+                    if(fireStore != null) {
+                        fireStore!!.fetchHillforts {
+                            view?.hideProgressSignup()
+                            view?.navigateTo(VIEW.LIST)
+                        }
+                    }
                 } else {
                     view?.hideProgressSignup()
                     view?.toast("Sign Up Failed: ${task.exception?.message}")
@@ -88,11 +98,5 @@ class LoginSignupPresenter(view: BaseView) : BasePresenter(view)  {
 
     fun isEmailValid(email: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-    fun doLogout() {
-        FirebaseAuth.getInstance().signOut()
-        app.hillforts.clear()
-        view?.navigateTo(VIEW.LOGINSIGNUP)
     }
 }

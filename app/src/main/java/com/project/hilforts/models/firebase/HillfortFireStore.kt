@@ -36,11 +36,14 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
             hillfort.fbId = key
             hillforts.add(hillfort)
             db.child("users").child(userId).child("hillforts").child(key).setValue(hillfort)
+            updateImage1(hillfort)
+            updateImage2(hillfort)
+            updateImage3(hillfort)
+            updateImage4(hillfort)
         }
     }
 
     override fun update(hillfort: HillfortModel) {
-        info ("fire update start")
         val foundHillfort: HillfortModel? = hillforts.find {h -> h.fbId == hillfort.fbId}
         if (foundHillfort != null){
             foundHillfort.title = hillfort.title
@@ -59,9 +62,7 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
         if ((hillfort.image1.length) > 0 && (hillfort.image1[0] != 'h')) {
             updateImage1(hillfort)
         }
-
-        info ("fire update end")
-        /*if ((hillfort.image2.length) > 0 && (hillfort.image2[0] != 'h')) {
+        if ((hillfort.image2.length) > 0 && (hillfort.image2[0] != 'h')) {
             updateImage2(hillfort)
         }
         if ((hillfort.image3.length) > 0 && (hillfort.image3[0] != 'h')){
@@ -69,7 +70,7 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
         }
         if ((hillfort.image4.length) > 0 && (hillfort.image4[0] != 'h')){
             updateImage4(hillfort)
-        }*/
+        }
     }
 
     override fun delete(hillfort: HillfortModel) {
@@ -82,7 +83,6 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
     }
 
     fun updateImage1(hillfort: HillfortModel){
-        info  ("Start update Image")
         if (hillfort.image1 != "" ) {
             val fileName = File(hillfort.image1)
             val imageName = fileName.getName()
@@ -107,7 +107,6 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
             }
         }
 
-        info  ("End update Image")
     }
 
     fun updateImage2(hillfort: HillfortModel){

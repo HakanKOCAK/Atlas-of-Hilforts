@@ -15,6 +15,7 @@ import com.project.hilforts.views.loginSignup.LoginSignupView
 import com.project.hilforts.views.map.HillfortMapView
 import com.project.hilforts.views.settings.SettingsView
 import org.jetbrains.anko.AnkoLogger
+import java.util.ArrayList
 
 val IMAGE_REQUEST1 = 1
 val IMAGE_REQUEST2 = 2
