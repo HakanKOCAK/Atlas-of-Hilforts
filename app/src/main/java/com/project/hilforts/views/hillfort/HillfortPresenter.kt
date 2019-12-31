@@ -67,6 +67,7 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
         hillfort.title = title
         hillfort.description = description
         hillfort.additionalNote = additionalNote
+
         doAsync {
             if (edit) {
                 app.hillforts.update(hillfort)

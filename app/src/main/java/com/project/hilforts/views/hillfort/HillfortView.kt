@@ -21,7 +21,6 @@ import org.jetbrains.anko.toast
 class HillfortView : BaseView(), AnkoLogger {
 
     lateinit var presenter: HillfortPresenter
-    var hillfort = HillfortModel()
     lateinit var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,14 +51,10 @@ class HillfortView : BaseView(), AnkoLogger {
             textViewForVisited.setText(str)
         }
 
+        mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             presenter.doConfigureMap(it)
             it.setOnMapClickListener { presenter.doSetLocation() }
-        }
-        mapView.onCreate(savedInstanceState)
-        mapView.getMapAsync {
-            map = it
-            presenter.doConfigureMap(map)
         }
     }
 
@@ -67,6 +62,7 @@ class HillfortView : BaseView(), AnkoLogger {
         hillfortTitle.setText(hillfort.title)
         description.setText(hillfort.description)
         additionalNote.setText(hillfort.additionalNote)
+
         if(hillfort.image1 != ""){Glide.with(this).load(hillfort.image1).into(hillfortImage1)}
         if(hillfort.image2 != ""){Glide.with(this).load(hillfort.image2).into(hillfortImage2)}
         if(hillfort.image3 != ""){Glide.with(this).load(hillfort.image3).into(hillfortImage3)}

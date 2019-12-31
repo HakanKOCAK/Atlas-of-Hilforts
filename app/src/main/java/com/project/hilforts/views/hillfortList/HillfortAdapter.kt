@@ -47,7 +47,7 @@ class HillfortAdapter constructor(
                 Glide.with(itemView.context).load(hillfort.image2).into(itemView.imageIcon)
             } else if (hillfort.image3 != ""){
                 Glide.with(itemView.context).load(hillfort.image3).into(itemView.imageIcon)
-            } else {
+            } else if (hillfort.image4 != "") {
                 Glide.with(itemView.context).load(hillfort.image4).into(itemView.imageIcon)
             }
 
