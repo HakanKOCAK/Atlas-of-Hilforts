@@ -119,6 +119,35 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
             return ""
         }
     }
+
+    fun doSetRate(type: String, num: Int){
+
+        if (type == "outline"){
+            if (num == 1){
+                hillfort.rate = 1
+            } else if(num == 2){
+                hillfort.rate = 2
+            } else if(num == 3){
+                hillfort.rate = 3
+            } else if (num == 4){
+                hillfort.rate = 4
+            } else {
+                hillfort.rate = 5
+            }
+        }else{
+            if (num == 1){
+                hillfort.rate = 1
+            } else if(num == 2){
+                hillfort.rate = 2
+            } else if(num == 3){
+                hillfort.rate = 3
+            } else if (num == 4){
+                hillfort.rate = 4
+            } else {
+                hillfort.rate = 5
+            }
+        }
+    }
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         when (requestCode) {
             IMAGE_REQUEST1 -> {

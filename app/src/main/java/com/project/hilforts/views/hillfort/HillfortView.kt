@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import com.project.hilforts.R
@@ -52,6 +53,112 @@ class HillfortView : BaseView(), AnkoLogger {
             textViewForVisited.setText(str)
         }
 
+        star_outline1.setOnClickListener(){
+            star_outline1.visibility = View.GONE
+            star_outline2.visibility = View.VISIBLE
+            star_outline3.visibility = View.VISIBLE
+            star_outline4.visibility = View.VISIBLE
+            star_outline5.visibility = View.VISIBLE
+            star1.visibility = View.VISIBLE
+            star2.visibility = View.GONE
+            star3.visibility = View.GONE
+            star4.visibility = View.GONE
+            star5.visibility = View.GONE
+            presenter.doSetRate("outline", 1)
+        }
+
+        star1.setOnClickListener(){
+            star_outline2.visibility = View.VISIBLE
+            star_outline3.visibility = View.VISIBLE
+            star_outline4.visibility = View.VISIBLE
+            star_outline5.visibility = View.VISIBLE
+            star2.visibility = View.GONE
+            star3.visibility = View.GONE
+            star4.visibility = View.GONE
+            star5.visibility = View.GONE
+            presenter.doSetRate("star", 1)
+        }
+
+        star_outline2.setOnClickListener(){
+            star_outline1.visibility = View.GONE
+            star_outline2.visibility = View.GONE
+            star_outline3.visibility = View.VISIBLE
+            star_outline4.visibility = View.VISIBLE
+            star_outline5.visibility = View.VISIBLE
+            star1.visibility = View.VISIBLE
+            star2.visibility = View.VISIBLE
+            star3.visibility = View.GONE
+            star4.visibility = View.GONE
+            star5.visibility = View.GONE
+            presenter.doSetRate("outline", 2)
+        }
+
+        star2.setOnClickListener(){
+            star_outline3.visibility = View.VISIBLE
+            star_outline4.visibility = View.VISIBLE
+            star_outline5.visibility = View.VISIBLE
+            star3.visibility = View.GONE
+            star4.visibility = View.GONE
+            star5.visibility = View.GONE
+            presenter.doSetRate("star", 2)
+        }
+
+        star_outline3.setOnClickListener(){
+            star_outline1.visibility = View.GONE
+            star_outline2.visibility = View.GONE
+            star_outline3.visibility = View.GONE
+            star_outline4.visibility = View.VISIBLE
+            star_outline5.visibility = View.VISIBLE
+            star1.visibility = View.VISIBLE
+            star2.visibility = View.VISIBLE
+            star3.visibility = View.VISIBLE
+            star4.visibility = View.GONE
+            star5.visibility = View.GONE
+            presenter.doSetRate("outline", 3)
+        }
+
+        star3.setOnClickListener(){
+            star_outline4.visibility = View.VISIBLE
+            star_outline5.visibility = View.VISIBLE
+            star4.visibility = View.GONE
+            star5.visibility = View.GONE
+            presenter.doSetRate("star", 3)
+        }
+
+        star_outline4.setOnClickListener(){
+            star_outline1.visibility = View.GONE
+            star_outline2.visibility = View.GONE
+            star_outline3.visibility = View.GONE
+            star_outline4.visibility = View.GONE
+            star_outline5.visibility = View.VISIBLE
+            star1.visibility = View.VISIBLE
+            star2.visibility = View.VISIBLE
+            star3.visibility = View.VISIBLE
+            star4.visibility = View.VISIBLE
+            star5.visibility = View.GONE
+            presenter.doSetRate("outline", 4)
+        }
+
+        star4.setOnClickListener(){
+            star_outline5.visibility = View.VISIBLE
+            star5.visibility = View.GONE
+            presenter.doSetRate("star", 4)
+        }
+
+        star_outline5.setOnClickListener(){
+            star_outline1.visibility = View.GONE
+            star_outline2.visibility = View.GONE
+            star_outline3.visibility = View.GONE
+            star_outline4.visibility = View.GONE
+            star_outline5.visibility = View.GONE
+            star1.visibility = View.VISIBLE
+            star2.visibility = View.VISIBLE
+            star3.visibility = View.VISIBLE
+            star4.visibility = View.VISIBLE
+            star5.visibility = View.VISIBLE
+            presenter.doSetRate("outline", 5)
+        }
+
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             presenter.doConfigureMap(it)
@@ -75,6 +182,75 @@ class HillfortView : BaseView(), AnkoLogger {
         } else {
             visited.isChecked = false
             textViewForVisited.setText("")
+        }
+
+
+        if (hillfort.rate == 0) {
+            star_outline1.visibility = View.VISIBLE
+            star_outline2.visibility = View.VISIBLE
+            star_outline3.visibility = View.VISIBLE
+            star_outline4.visibility = View.VISIBLE
+            star_outline5.visibility = View.VISIBLE
+            star1.visibility = View.GONE
+            star2.visibility = View.GONE
+            star3.visibility = View.GONE
+            star4.visibility = View.GONE
+            star5.visibility = View.GONE
+        } else if(hillfort.rate == 1){
+            star_outline1.visibility = View.GONE
+            star_outline2.visibility = View.VISIBLE
+            star_outline3.visibility = View.VISIBLE
+            star_outline4.visibility = View.VISIBLE
+            star_outline5.visibility = View.VISIBLE
+            star1.visibility = View.VISIBLE
+            star2.visibility = View.GONE
+            star3.visibility = View.GONE
+            star4.visibility = View.GONE
+            star5.visibility = View.GONE
+        } else if (hillfort.rate == 2){
+            star_outline1.visibility = View.GONE
+            star_outline2.visibility = View.GONE
+            star_outline3.visibility = View.VISIBLE
+            star_outline4.visibility = View.VISIBLE
+            star_outline5.visibility = View.VISIBLE
+            star1.visibility = View.VISIBLE
+            star2.visibility = View.VISIBLE
+            star3.visibility = View.GONE
+            star4.visibility = View.GONE
+            star5.visibility = View.GONE
+        } else if (hillfort.rate == 3){
+            star_outline1.visibility = View.GONE
+            star_outline2.visibility = View.GONE
+            star_outline3.visibility = View.GONE
+            star_outline4.visibility = View.VISIBLE
+            star_outline5.visibility = View.VISIBLE
+            star1.visibility = View.VISIBLE
+            star2.visibility = View.VISIBLE
+            star3.visibility = View.VISIBLE
+            star4.visibility = View.GONE
+            star5.visibility = View.GONE
+        } else if (hillfort.rate == 4){
+            star_outline1.visibility = View.GONE
+            star_outline2.visibility = View.GONE
+            star_outline3.visibility = View.GONE
+            star_outline4.visibility = View.GONE
+            star_outline5.visibility = View.VISIBLE
+            star1.visibility = View.VISIBLE
+            star2.visibility = View.VISIBLE
+            star3.visibility = View.VISIBLE
+            star4.visibility = View.VISIBLE
+            star5.visibility = View.GONE
+        } else {
+            star_outline1.visibility = View.GONE
+            star_outline2.visibility = View.GONE
+            star_outline3.visibility = View.GONE
+            star_outline4.visibility = View.GONE
+            star_outline5.visibility = View.GONE
+            star1.visibility = View.VISIBLE
+            star2.visibility = View.VISIBLE
+            star3.visibility = View.VISIBLE
+            star4.visibility = View.VISIBLE
+            star5.visibility = View.VISIBLE
         }
 
         this.showLocation(hillfort.location)

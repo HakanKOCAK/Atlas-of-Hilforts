@@ -16,6 +16,7 @@ data class HillfortModel(var fbId: String="",
                          var image4: String = "",
                          var visited: Boolean = false,
                          var favorite: Boolean = false,
+                         var rate: Int = 0,
                          var dateVisited:String = "",
                          var additionalNote: String = "",
                          @Embedded var location : Location = Location()) : Parcelable

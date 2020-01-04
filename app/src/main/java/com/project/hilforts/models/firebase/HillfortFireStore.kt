@@ -54,6 +54,7 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger{
             foundHillfort.visited = hillfort.visited
             foundHillfort.image1 = hillfort.image1
             foundHillfort.image2 = hillfort.image2
+            foundHillfort.rate = hillfort.rate
             foundHillfort.image3 = hillfort.image3
             foundHillfort.image4 = hillfort.image4
             foundHillfort.favorite = hillfort.favorite

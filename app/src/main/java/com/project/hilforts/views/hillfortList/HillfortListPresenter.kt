@@ -40,10 +40,6 @@ class HillfortListPresenter(view: BaseView) : BasePresenter(view) {
         view?.navigateTo(VIEW.HILLFORT)
     }
 
-    fun doShowSelectedScreen(){
-        view?.navigateTo(VIEW.LIST)
-    }
-
     fun doShowSettingsScreen(){
         view?.navigateTo(VIEW.SETTINGS)
     }

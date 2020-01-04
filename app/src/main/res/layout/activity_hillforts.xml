@@ -54,7 +54,7 @@
                     android:textSize="13sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/visitedLayout1" />
+                    app:layout_constraintTop_toBottomOf="@+id/rateLayout" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/imgLayout1"
@@ -203,32 +203,189 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/description" />
 
+                <TextView
+                    android:id="@+id/textViewForVisit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal"
+                    android:text="Please Click on the Checkbox to Visit the Hillfort"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/additionalNote" />
                 <LinearLayout
                     android:id="@+id/visitedLayout1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_margin="8dp"
                     android:orientation="horizontal"
+                    android:gravity="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/additionalNote">
+                    app:layout_constraintTop_toBottomOf="@+id/textViewForVisit">
 
                     <CheckBox
                         android:id="@+id/visited"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
-                        android:text="Visited" />
+                        android:text="@string/text_visited" />
 
                     <TextView
                         android:id="@+id/textViewForVisited"
-                        android:layout_width="wrap_content"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginStart="15dp"
                         android:textSize="13sp" />
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/textViewForRates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal"
+                    android:text="Please Click on the Stars to Rate the Hillfort"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/visitedLayout1" />
+                <LinearLayout
+                    android:id="@+id/rateLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewForRates">
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:materialIcon="star"
+                        app:materialIconSize="30dp"
+                        android:scaleType="center"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:visibility="gone"
+                        android:tint="#FFD700"
+                        android:foregroundTint="#FFD700"
+                        android:id="@+id/star1"
+                        />
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:materialIcon="star"
+                        app:materialIconSize="30dp"
+                        android:scaleType="center"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:visibility="gone"
+                        android:id="@+id/star2"
+                        />
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:materialIcon="star"
+                        app:materialIconSize="30dp"
+                        android:scaleType="center"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:visibility="gone"
+                        android:id="@+id/star3"
+                        />
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:materialIcon="star"
+                        app:materialIconSize="30dp"
+                        android:scaleType="center"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:visibility="gone"
+                        android:id="@+id/star4"
+                        />
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:materialIcon="star"
+                        app:materialIconSize="30dp"
+                        android:scaleType="center"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:visibility="gone"
+                        android:id="@+id/star5"
+                        />
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:materialIcon="star_outline"
+                        app:materialIconSize="30dp"
+                        android:scaleType="center"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:visibility="visible"
+                        android:id="@+id/star_outline1"
+                        />
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:materialIcon="star_outline"
+                        android:layout_weight="1"
+                        app:materialIconSize="30dp"
+                        android:scaleType="center"
+                        android:background="#fff"
+                        android:visibility="visible"
+                        android:id="@+id/star_outline2"
+                        />
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:materialIcon="star_outline"
+                        android:layout_weight="1"
+                        app:materialIconSize="30dp"
+                        android:scaleType="center"
+                        android:background="#fff"
+                        android:visibility="visible"
+                        android:id="@+id/star_outline3"
+                        />
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:materialIcon="star_outline"
+                        app:materialIconSize="30dp"
+                        android:layout_weight="1"
+                        android:scaleType="center"
+                        android:background="#fff"
+                        android:visibility="visible"
+                        android:id="@+id/star_outline4"
+                        />
+                    <net.steamcrafted.materialiconlib.MaterialIconView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:materialIcon="star_outline"
+                        app:materialIconSize="30dp"
+                        android:scaleType="center"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:visibility="visible"
+                        android:id="@+id/star_outline5"
+                        />
+                </LinearLayout>
                 <com.google.android.gms.maps.MapView
                     android:id="@+id/mapView"
                     android:layout_width="363dp"

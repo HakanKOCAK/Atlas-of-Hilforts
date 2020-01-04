@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
 import com.project.hilforts.R
 import com.project.hilforts.views.base.BaseView
@@ -20,6 +19,7 @@ class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.O
         setContentView(R.layout.activity_edit_location)
         super.init(toolbar, true)
         presenter = EditLocationPresenter(this)
+
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {

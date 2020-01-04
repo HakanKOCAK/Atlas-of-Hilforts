@@ -59,6 +59,17 @@ class HillfortListView : BaseView(),
                 else -> false
             }
         }
+
+        bottom_navigation.setOnNavigationItemReselectedListener {
+            when(it.itemId){
+                R.id.item_home -> {
+                    presenter.loadHillforts()
+                }
+                R.id.item_favorites -> {
+                    presenter.loadFavoriteHillforts()
+                }
+            }
+        }
         nav_view.setNavigationItemSelectedListener(this)
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
