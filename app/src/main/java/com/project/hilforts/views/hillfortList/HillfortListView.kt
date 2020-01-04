@@ -13,7 +13,6 @@ import com.project.hilforts.models.HillfortModel
 import com.project.hilforts.views.base.BaseView
 import kotlinx.android.synthetic.main.activity_hilfort_list.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import java.util.ArrayList
 
 class HillfortListView : BaseView(),
     HillfortListener, NavigationView.OnNavigationItemSelectedListener{
@@ -53,13 +52,12 @@ class HillfortListView : BaseView(),
         drawerToggle.isDrawerIndicatorEnabled = true
         drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
-
+        
         nav_view.setNavigationItemSelectedListener(this)
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
         presenter.loadHillforts()
-
     }
 
     override fun showHillforts(hillforts: List<HillfortModel>) {
@@ -115,9 +113,10 @@ class HillfortListView : BaseView(),
 
     override fun onHillfortClick(hillfort: HillfortModel) {
         if(isHome){
-            return
+            presenter.doAddOrDeleteToFavorites(hillfort)
+            presenter.loadHillforts()
         } else if (isEditing){
-           presenter.doEditHillfort(hillfort)
+            presenter.doEditHillfort(hillfort)
         } else {
             val alertDialog = AlertDialog.Builder(this@HillfortListView)
             alertDialog.setTitle("${hillfort.title}")
@@ -125,6 +124,7 @@ class HillfortListView : BaseView(),
 
             alertDialog.setPositiveButton("Yes") { dialog, which ->
                 presenter.doDeleteHillfort(hillfort)
+                presenter.loadHillforts()
             }
             alertDialog.setNeutralButton("Cancel"){dialog, which ->
                 dialog.dismiss()

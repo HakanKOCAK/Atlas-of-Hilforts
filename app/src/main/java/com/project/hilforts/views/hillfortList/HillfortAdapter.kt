@@ -62,9 +62,18 @@ class HillfortAdapter constructor(
 
             if(HillfortListView.isHome){
                 itemView.visited.visibility = View.VISIBLE
+                if(hillfort.favorite){
+                    itemView.favorite_icon.visibility = View.VISIBLE
+                    itemView.not_favorite_icon.visibility = View.GONE
+                } else {
+                    itemView.favorite_icon.visibility = View.GONE
+                    itemView.not_favorite_icon.visibility = View.VISIBLE
+                }
                 itemView.edit_icon.visibility = View.GONE
                 itemView.delete_icon.visibility = View.GONE
             } else if (HillfortListView.isEditing){
+                itemView.favorite_icon.visibility = View.GONE
+                itemView.not_favorite_icon.visibility = View.GONE
                 itemView.visited.visibility = View.GONE
                 itemView.edit_icon.visibility = View.VISIBLE
                 itemView.delete_icon.visibility = View.GONE
@@ -76,6 +85,8 @@ class HillfortAdapter constructor(
                     itemView.delete_icon.setBackgroundColor(Color.parseColor("#ffffff"))
                 }
             } else {
+                itemView.favorite_icon.visibility = View.GONE
+                itemView.not_favorite_icon.visibility = View.GONE
                 itemView.visited.visibility = View.GONE
                 itemView.edit_icon.visibility = View.GONE
                 itemView.delete_icon.visibility = View.VISIBLE

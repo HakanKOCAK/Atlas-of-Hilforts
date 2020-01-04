@@ -49,12 +49,16 @@ class HillfortListPresenter(view: BaseView) : BasePresenter(view) {
         view?.navigateTo(VIEW.HILLFORT, 0, "hillfort_edit", hillfort)
     }
 
+    fun doAddOrDeleteToFavorites(hillfort: HillfortModel){
+        hillfort.favorite = !hillfort.favorite
+        doAsync {
+            app.hillforts.update(hillfort)
+        }
+    }
+
     fun doDeleteHillfort(hillfort: HillfortModel){
         doAsync {
             app.hillforts.delete(hillfort)
-            uiThread {
-                view?.navigateTo(VIEW.LIST)
-            }
         }
     }
 }
