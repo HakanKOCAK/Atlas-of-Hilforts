@@ -23,6 +23,15 @@ class HillfortListPresenter(view: BaseView) : BasePresenter(view) {
         }
     }
 
+    fun loadFavoriteHillforts(){
+        doAsync {
+            val hillforts = app.hillforts.findFavorites()
+            uiThread {
+                view?.showHillforts(hillforts)
+            }
+        }
+    }
+
     fun doShowHillfortsMap() {
         view?.navigateTo(VIEW.MAPS)
     }

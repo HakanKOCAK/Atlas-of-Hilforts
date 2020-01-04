@@ -28,17 +28,10 @@ class HillfortListView : BaseView(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hilfort_list)
         setSupportActionBar(toolBar)
-        init(toolBar, false)
-        val actionBar = supportActionBar
+        super.init(toolBar, false)
+
         presenter = initPresenter(HillfortListPresenter(this)) as HillfortListPresenter
 
-        if(isHome){
-            actionBar?.title = "Home"
-        } else if(isEditing) {
-            actionBar?.title = "Edit"
-        } else {
-            actionBar?.title = "Delete"
-        }
         val drawerToggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(
             this,
             drawerLayout,
@@ -52,7 +45,20 @@ class HillfortListView : BaseView(),
         drawerToggle.isDrawerIndicatorEnabled = true
         drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
-        
+
+        bottom_navigation.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.item_home -> {
+                    presenter.loadHillforts()
+                    true
+                }
+                R.id.item_favorites -> {
+                    presenter.loadFavoriteHillforts()
+                    true
+                }
+                else -> false
+            }
+        }
         nav_view.setNavigationItemSelectedListener(this)
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
@@ -83,7 +89,11 @@ class HillfortListView : BaseView(),
                 isHome = true
                 isEditing = false
                 isDeleting = false
-                presenter.doShowSelectedScreen()
+                if(bottom_navigation.menu.getItem(0).isChecked){
+                    presenter.loadHillforts()
+                } else {
+                    presenter.loadFavoriteHillforts()
+                }
             }
             R.id.add -> {
                 presenter.doAddHillfort()
@@ -92,7 +102,11 @@ class HillfortListView : BaseView(),
                 isHome = false
                 isEditing = true
                 isDeleting = false
-                presenter.doShowSelectedScreen()
+                if(bottom_navigation.menu.getItem(0).isChecked){
+                    presenter.loadHillforts()
+                } else {
+                    presenter.loadFavoriteHillforts()
+                }
             }
             R.id.settings -> {
                 presenter.doShowSettingsScreen()
@@ -104,7 +118,11 @@ class HillfortListView : BaseView(),
                 isHome = false
                 isEditing = false
                 isDeleting = true
-                presenter.doShowSelectedScreen()
+                if(bottom_navigation.menu.getItem(0).isChecked){
+                    presenter.loadHillforts()
+                } else {
+                    presenter.loadFavoriteHillforts()
+                }
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -114,9 +132,19 @@ class HillfortListView : BaseView(),
     override fun onHillfortClick(hillfort: HillfortModel) {
         if(isHome){
             presenter.doAddOrDeleteToFavorites(hillfort)
-            presenter.loadHillforts()
+            if(bottom_navigation.menu.getItem(0).isChecked){
+                presenter.loadHillforts()
+            } else {
+                presenter.loadFavoriteHillforts()
+            }
+
         } else if (isEditing){
             presenter.doEditHillfort(hillfort)
+            if(bottom_navigation.menu.getItem(0).isChecked){
+                presenter.loadHillforts()
+            } else {
+                presenter.loadFavoriteHillforts()
+            }
         } else {
             val alertDialog = AlertDialog.Builder(this@HillfortListView)
             alertDialog.setTitle("${hillfort.title}")
@@ -124,7 +152,11 @@ class HillfortListView : BaseView(),
 
             alertDialog.setPositiveButton("Yes") { dialog, which ->
                 presenter.doDeleteHillfort(hillfort)
-                presenter.loadHillforts()
+                if(bottom_navigation.menu.getItem(0).isChecked){
+                    presenter.loadHillforts()
+                } else {
+                    presenter.loadFavoriteHillforts()
+                }
             }
             alertDialog.setNeutralButton("Cancel"){dialog, which ->
                 dialog.dismiss()
