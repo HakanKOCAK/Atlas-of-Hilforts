@@ -71,6 +71,13 @@ class HillfortAdapter constructor(
                 }
                 itemView.edit_icon.visibility = View.GONE
                 itemView.delete_icon.visibility = View.GONE
+                if(hillfort.visited) {
+                    itemView.favorite_icon.setBackgroundColor(Color.parseColor("#BDFEA2"))
+                    itemView.not_favorite_icon.setBackgroundColor(Color.parseColor("#BDFEA2"))
+                }else{
+                    itemView.favorite_icon.setBackgroundColor(Color.parseColor("#ffffff"))
+                    itemView.not_favorite_icon.setBackgroundColor(Color.parseColor("#ffffff"))
+                }
             } else if (HillfortListView.isEditing){
                 itemView.favorite_icon.visibility = View.GONE
                 itemView.not_favorite_icon.visibility = View.GONE
@@ -79,10 +86,8 @@ class HillfortAdapter constructor(
                 itemView.delete_icon.visibility = View.GONE
                 if(hillfort.visited){
                     itemView.edit_icon.setBackgroundColor(Color.parseColor("#BDFEA2"))
-                    itemView.delete_icon.setBackgroundColor(Color.parseColor("#BDFEA2"))
                 } else {
                     itemView.edit_icon.setBackgroundColor(Color.parseColor("#ffffff"))
-                    itemView.delete_icon.setBackgroundColor(Color.parseColor("#ffffff"))
                 }
             } else {
                 itemView.favorite_icon.visibility = View.GONE

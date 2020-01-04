@@ -3,8 +3,10 @@ package com.project.hilforts.views.hillfortList
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.EditText
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
@@ -84,6 +86,30 @@ class HillfortListView : BaseView(),
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+
+        val searchItem = menu?.findItem(R.id.item_search)
+        if (searchItem != null){
+            val searchView = searchItem.actionView as SearchView
+            searchView.queryHint = "Search Hillfort"
+
+            searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+                override fun onQueryTextChange(newText: String?): Boolean {
+
+                    if (newText!!.isNotEmpty()){
+                        val search = newText.toLowerCase()
+                        presenter.doFilterHillforts(search)
+                    } else {
+                        presenter.loadHillforts()
+                    }
+                    return true
+                }
+
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return true
+                }
+
+            })
+        }
         return super.onCreateOptionsMenu(menu)
     }
 

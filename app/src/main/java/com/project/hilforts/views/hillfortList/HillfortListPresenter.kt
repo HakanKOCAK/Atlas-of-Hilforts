@@ -40,6 +40,15 @@ class HillfortListPresenter(view: BaseView) : BasePresenter(view) {
         view?.navigateTo(VIEW.HILLFORT)
     }
 
+    fun doFilterHillforts(search: String){
+        doAsync {
+            var hillforts = app.hillforts.findAll()
+            hillforts = hillforts.filter { h -> h.title.toLowerCase().contains(search)}
+            uiThread {
+                view?.showHillforts(hillforts)
+            }
+        }
+    }
     fun doShowSettingsScreen(){
         view?.navigateTo(VIEW.SETTINGS)
     }
