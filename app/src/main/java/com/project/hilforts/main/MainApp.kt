@@ -21,7 +21,7 @@ class MainApp : Application(), AnkoLogger {
         hillforts = HillfortFireStore(applicationContext)
     }
 
-    fun setAndGetDefaultHillforts(){
+    fun setDefaultHillforts(){
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
         val db = FirebaseDatabase.getInstance().reference
 

@@ -80,7 +80,7 @@ class LoginSignupPresenter(view: BaseView) : BasePresenter(view)  {
                 if (task.isSuccessful) {
                     app.loggedInUserEmail = email
                     app.loggedInUserPassword = password
-                    app.setAndGetDefaultHillforts()
+                    app.setDefaultHillforts()
                     if(fireStore != null) {
                         fireStore!!.fetchHillforts {
                             view?.hideProgressSignup()
