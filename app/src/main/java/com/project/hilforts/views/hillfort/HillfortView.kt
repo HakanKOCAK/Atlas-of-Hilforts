@@ -8,7 +8,6 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import com.project.hilforts.R
-import com.project.hilforts.helpers.readImageFromPath
 import com.project.hilforts.models.HillfortModel
 import com.project.hilforts.models.Location
 import com.project.hilforts.views.base.BaseView
