@@ -6,8 +6,10 @@
     <string name="menu_viewAllHillforts">Map</string>
     <string name="menu_search">Search</string>
     <string name="menu_cancelHillfort">Cancel</string>
+    <string name="menu_shareHillfort">Hillfort</string>
     <string name="menu_savePlacemark">Save</string>
     <string name="menu_home">Home</string>
+    <string name="menu_share">Share</string>
     <string name="menu_add">Add</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_delete">Delete</string>
